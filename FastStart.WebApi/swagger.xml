@@ -1,0 +1,87 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>FastStart.WebApi</name>
+    </assembly>
+    <members>
+        <member name="M:FastStart.WebApi.Config.SqlSugarConfig.AddSqlSugarModule(Microsoft.Extensions.Configuration.IConfiguration,System.String)">
+            <summary>
+            Sqlsugar注入
+            </summary>
+            <param name="Services"></param>
+        </member>
+        <member name="T:FastStart.WebApi.Controllers.LoginController">
+            <summary>
+            登录接口
+            </summary>
+        </member>
+        <member name="M:FastStart.WebApi.Controllers.LoginController.Login(FastStart.Domain.Models.LoginBodyDTO)">
+            <summary>
+            用户登录
+            </summary>
+            <param name="loginBodyDTO"></param>
+            <returns></returns>
+        </member>
+        <member name="T:FastStart.WebApi.Controllers.SysUserController">
+            <summary>
+            用户管理
+            </summary>
+        </member>
+        <member name="M:FastStart.WebApi.Controllers.SysUserController.Get">
+            <summary>
+            获取全部用户信息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FastStart.WebApi.Controllers.SysUserController.GetSysUserToPage(System.Int32,System.Int32)">
+            <summary>
+            分页获取用户信息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FastStart.WebApi.Controllers.SysUserController.GetSysUserById(System.Int32)">
+            <summary>
+            通过id获取用户信息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FastStart.WebApi.Controllers.SysUserController.AddSysUser(FastStart.Domain.Entity.SysUser)">
+            <summary>
+            添加用户信息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FastStart.WebApi.Controllers.SysUserController.DeleteSysUser(System.Object)">
+            <summary>
+            通过id删除单个用户信息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FastStart.WebApi.Controllers.SysUserController.DeleteSysUserList(System.Object[])">
+            <summary>
+            多选后通过ids进行批量删除
+            </summary>
+            <param name="ids">id数组</param>
+            <returns></returns>
+        </member>
+        <member name="M:FastStart.WebApi.Controllers.SysUserController.UpdateSysUser(FastStart.Domain.Entity.SysUser)">
+            <summary>
+            更新用户信息
+            </summary>
+            <param name="sysUser">更新后的新实体信息</param>
+            <returns></returns>
+        </member>
+        <member name="T:FastStart.WebApi.Filter.CustomerExceptionFilter">
+            <summary>
+            自定义异常过滤器
+            </summary>
+        </member>
+        <member name="M:FastStart.WebApi.Filter.CustomerExceptionFilter.Microsoft#AspNetCore#Mvc#Filters#IExceptionFilter#OnException(Microsoft.AspNetCore.Mvc.Filters.ExceptionContext)">
+            <summary>
+            重写OnExceptionAsync方法，定义自己的处理逻辑
+            </summary>
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
