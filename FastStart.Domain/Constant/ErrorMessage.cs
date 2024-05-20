@@ -7,6 +7,6 @@
     {
         public const string userDoesNotExistOrPasswordIsIncorrect = "用户不存在或密码错误";
 
-        public const string userNameOrPasswordIsEmpty= "用户名或密码为空";
+        public const string userNameOrPasswordIsEmpty = "用户名或密码为空";
     }
 }

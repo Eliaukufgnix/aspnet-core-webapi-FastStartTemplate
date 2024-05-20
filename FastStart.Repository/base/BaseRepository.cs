@@ -6,7 +6,7 @@ namespace FastStart.Repository
 {
     public class BaseRepository<T> : IBaseRepository<T> where T : class, new()
     {
-        private readonly ISqlSugarClient db;
+        public ISqlSugarClient db;
 
         public BaseRepository(ISqlSugarClient _db)
         {
@@ -73,7 +73,7 @@ namespace FastStart.Repository
             }
         }
 
-        public virtual async Task<T> GetEntityByIdAsync(int id)
+        public virtual async Task<T> GetEntityByIdAsync(object id)
         {
             try
             {
@@ -121,11 +121,23 @@ namespace FastStart.Repository
             }
         }
 
-        public virtual List<T> GetEntitysToPage(int pageNumber, int pageSize, ref int totalCount)
+        public virtual List<T> GetEntitysToPage(int pageIndex, int pageSize, ref int totalCount)
         {
             try
             {
-                return db.Queryable<T>().ToPageList(pageNumber, pageSize, ref totalCount);
+                return db.Queryable<T>().ToPageList(pageIndex, pageSize, ref totalCount);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public virtual List<T> GetEntitysByWhereToPage(Expression<Func<T, bool>> expression, int pageIndex, int pageSize, ref int totalCount)
+        {
+            try
+            {
+                return db.Queryable<T>().Where(expression).ToPageList(pageIndex, pageSize, ref totalCount);
             }
             catch (Exception)
             {

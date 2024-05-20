@@ -3,8 +3,9 @@ using FastStart.Domain;
 using FastStart.Domain.Entity;
 using FastStart.Domain.Models;
 using FastStart.Service;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using SqlSugar;
+using System.Linq.Expressions;
 
 namespace FastStart.WebApi.Controllers
 {
@@ -13,14 +14,20 @@ namespace FastStart.WebApi.Controllers
     /// </summary>
     [Route("dev-api/[controller]")]
     [ApiController]
+    [ApiExplorerSettings(GroupName = "SysUser")]
     public class SysUserController : ControllerBase
     {
-        private readonly ISysUserService service;
+        private readonly ISysUserService sysUserService;
         private readonly IMapper mapper;
 
-        public SysUserController(ISysUserService _service, IMapper _mapper)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="_sysUserService"></param>
+        /// <param name="_mapper"></param>
+        public SysUserController(ISysUserService _sysUserService, IMapper _mapper)
         {
-            service = _service;
+            sysUserService = _sysUserService;
             mapper = _mapper;
         }
 
@@ -29,27 +36,68 @@ namespace FastStart.WebApi.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        [AllowAnonymous]
         [Route("GetAllSysUser")]
         public async Task<ResultModel<List<SysUserVO>>> Get()
         {
-            List<SysUser> sysUsers = await service.GetEntitysAsync();
+            List<SysUser> sysUsers = await sysUserService.GetEntitysAsync();
             List<SysUserVO> sysUserVOs = mapper.Map<List<SysUserVO>>(sysUsers);
             return ResultModel<List<SysUserVO>>.Success(sysUserVOs);
         }
 
         /// <summary>
-        /// 分页获取用户信息
+        /// 带条件分页查询获取用户信息
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        [AllowAnonymous]
-        [Route("GetSysUserToPage")]
-        public ResultModel<List<SysUser>> GetSysUserToPage(int pageNumber = 1, int pageSize = 10)
+        [Route("GetSysUserByWhereToPage")]
+        public ResultModel<SelectByPageVO<SysUser>> GetSysUserByWhereToPage([FromQuery] SysUserDTO queryParameters)
         {
+            // Build the query expression
+            Expression<Func<SysUser, bool>> whereExpression = BuildQueryExpression(queryParameters);
+
+            // Now pass the expression to your service layer
             int totalCount = 0;
-            List<SysUser> sysUsers = service.GetEntitysToPage(pageNumber, pageSize, ref totalCount);
-            return ResultModel<List<SysUser>>.Success(sysUsers);
+            List<SysUser> sysUsers = sysUserService.GetEntitysByWhereToPage(
+                whereExpression,
+                queryParameters.pageIndex,
+                queryParameters.pageSize,
+                ref totalCount
+            );
+
+            SelectByPageVO<SysUser> selectByPageVO = new(sysUsers, totalCount);
+            return ResultModel<SelectByPageVO<SysUser>>.Success(selectByPageVO);
+        }
+
+        /// <summary>
+        /// 构建查询表达式
+        /// </summary>
+        /// <param name="queryParameters"></param>
+        /// <returns></returns>
+        private static Expression<Func<SysUser, bool>> BuildQueryExpression(SysUserDTO queryParameters)
+        {
+            var expressionable = Expressionable.Create<SysUser>();
+            if (!string.IsNullOrEmpty(queryParameters.UserName))
+            {
+                expressionable.And(x => x.UserName.Contains(queryParameters.UserName));
+            }
+            if (!string.IsNullOrEmpty(queryParameters.NickName))
+            {
+                expressionable.And(x => x.NickName.Contains(queryParameters.NickName));
+            }
+            if (!string.IsNullOrEmpty(queryParameters.Phonenumber))
+            {
+                expressionable.And(x => x.Phonenumber.Contains(queryParameters.Phonenumber));
+            }
+
+            if (!string.IsNullOrEmpty(queryParameters.Email))
+            {
+                expressionable.And(x => x.Email.Contains(queryParameters.Email));
+            }
+            if (!string.IsNullOrEmpty(queryParameters.Sex))
+            {
+                expressionable.And(x => x.Sex == queryParameters.Sex);
+            }
+            return expressionable.ToExpression();
         }
 
         /// <summary>
@@ -57,11 +105,12 @@ namespace FastStart.WebApi.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        [AllowAnonymous]
         [Route("GetSysUserById")]
-        public async Task<ResultModel<SysUser>> GetSysUserById(int id)
+        public async Task<ResultModel<SysUser>> GetSysUserById([FromQuery] string id)
         {
-            SysUser sysUser = await service.GetEntityByWhereAsync(x => x.UserId.Equals(id));
+            if (string.IsNullOrEmpty(id))
+                return ResultModel<SysUser>.Fail("参数不能为空");
+            SysUser sysUser = await sysUserService.GetEntityByWhereAsync(x => x.UserId.Equals(id));
             return ResultModel<SysUser>.Success(sysUser);
         }
 
@@ -70,11 +119,10 @@ namespace FastStart.WebApi.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPost]
-        [AllowAnonymous]
         [Route("AddSysUser")]
         public async Task<ResultModel<bool>> AddSysUser([FromBody] SysUser sysUser)
         {
-            bool result = await service.CreateEntityAsync(sysUser);
+            bool result = await sysUserService.CreateEntityAsync(sysUser);
             return ResultModel<bool>.Success(result);
         }
 
@@ -83,25 +131,27 @@ namespace FastStart.WebApi.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpDelete]
-        [AllowAnonymous]
         [Route("DeleteSysUser")]
         public async Task<ResultModel<bool>> DeleteSysUser(object id)
         {
-            bool result = await service.DeleteEntityByIdAsync(id);
+            if (id == null)
+                return ResultModel<bool>.Fail("参数不能为空");
+            bool result = await sysUserService.DeleteEntityByIdAsync(id);
             return ResultModel<bool>.Success(result);
         }
 
         /// <summary>
         /// 多选后通过ids进行批量删除
         /// </summary>
-        /// <param name="ids">id数组</param>
+        /// <param name="dto">选择的实体</param>
         /// <returns></returns>
         [HttpDelete]
-        [AllowAnonymous]
         [Route("DeleteSysUserList")]
-        public async Task<ResultModel<int>> DeleteSysUserList([FromBody] object[] ids)
+        public async Task<ResultModel<int>> DeleteSysUserList([FromBody] IdsDTO dto)
         {
-            int deletedCount = await service.DeleteEntitysByWhereAsync(x => ids.Contains(x.UserId));
+            if (dto.Ids == null || dto.Ids.Length <= 0)
+                return ResultModel<int>.Fail("参数不能为空");
+            int deletedCount = await sysUserService.DeleteEntitysByWhereAsync(x => dto.Ids.Contains(x.UserId));
             return ResultModel<int>.Success(deletedCount);
         }
 
@@ -111,11 +161,26 @@ namespace FastStart.WebApi.Controllers
         /// <param name="sysUser">更新后的新实体信息</param>
         /// <returns></returns>
         [HttpPut]
-        [AllowAnonymous]
         [Route("UpdateSysUser")]
         public async Task<ResultModel<bool>> UpdateSysUser([FromBody] SysUser sysUser)
         {
-            bool result = await service.UpdateEntityAsync(sysUser);
+            bool result = await sysUserService.UpdateEntityAsync(sysUser);
+            return ResultModel<bool>.Success(result);
+        }
+
+        /// <summary>
+        /// 保存用户信息
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("SaveSysUser")]
+        public async Task<ResultModel<bool>> SaveSysUser([FromBody] SysUser sysUser)
+        {
+            if (sysUser == null)
+            {
+                return ResultModel<bool>.Fail("参数不能为空");
+            }
+            bool result = sysUser.UserId != default ? await sysUserService.UpdateEntityAsync(sysUser) : await sysUserService.CreateEntityAsync(sysUser);
             return ResultModel<bool>.Success(result);
         }
     }

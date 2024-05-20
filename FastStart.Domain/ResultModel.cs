@@ -193,6 +193,7 @@ namespace FastStart.Domain
     */
 
     #endregion 第一版
+
     /// <summary>
     /// 统一返回结果的格式
     /// </summary>
@@ -201,10 +202,11 @@ namespace FastStart.Domain
     {
         public const int SUCCESS = StatusCodes.Status200OK;
         public const int FAIL = StatusCodes.Status500InternalServerError;
-        public int Code { get; set; }
-        public string Message { get; set; }
-        public T Data { get; set; }
-        public string TimeStamp { get; set; }
+        public int code { get; set; }
+        public string message { get; set; }
+        public T data { get; set; }
+        public string timestamp { get; set; }
+
         #region 无参构造私有化
 
         private ResultModel()
@@ -280,10 +282,10 @@ namespace FastStart.Domain
         {
             return new ResultModel<T>()
             {
-                Code = code,
-                Message = message,
-                Data = data,
-                TimeStamp = DateTime.UtcNow.Ticks.ToString()
+                code = code,
+                message = message,
+                data = data,
+                timestamp = DateTime.UtcNow.Ticks.ToString()
             };
         }
     }

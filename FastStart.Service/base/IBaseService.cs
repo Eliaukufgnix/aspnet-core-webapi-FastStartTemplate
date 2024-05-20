@@ -59,7 +59,7 @@ namespace FastStart.Service
         /// </summary>
         /// <param name="id">主键ID</param>
         /// <returns>查询到的实体</returns>
-        Task<T> GetEntityByIdAsync(int id);
+        Task<T> GetEntityByIdAsync(object id);
 
         /// <summary>
         /// 根据条件单条查询
@@ -78,11 +78,21 @@ namespace FastStart.Service
         /// <summary>
         /// 分页查询
         /// </summary>
-        /// <param name="pageNumber">页码，从1开始</param>
+        /// <param name="pageIndex">页码，从1开始</param>
         /// <param name="pageSize">每页条数</param>
         /// <param name="totalCount">总记录数</param>
         /// <returns>查询到的实体集合</returns>
-        List<T> GetEntitysToPage(int pageNumber, int pageSize, ref int totalCount);
+        List<T> GetEntitysToPage(int pageIndex, int pageSize, ref int totalCount);
+
+        /// <summary>
+        /// 带条件的分页查询
+        /// </summary>
+        /// <param name="expression">查询条件</param>
+        /// <param name="pageIndex">页码，从1开始</param>
+        /// <param name="pageSize">每页条数</param>
+        /// <param name="totalCount">总记录数</param>
+        /// <returns>查询到的实体集合</returns>
+        List<T> GetEntitysByWhereToPage(Expression<Func<T, bool>> expression, int pageIndex, int pageSize, ref int totalCount);
 
         /// <summary>
         /// 原生SQL语句查询-List

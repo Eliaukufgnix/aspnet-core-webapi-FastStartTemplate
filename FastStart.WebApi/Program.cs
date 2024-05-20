@@ -1,21 +1,26 @@
 using Autofac;
-using Autofac.Core;
 using Autofac.Extensions.DependencyInjection;
 using FastStart.WebApi.Config;
 using FastStart.WebApi.Filter;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
-using Serilog.Events;
 using Serilog;
+using Serilog.Events;
 
 namespace FastStart.WebApi
 {
+    /// <summary>
+    /// 程序主入口
+    /// </summary>
     public class Program
     {
+        /// <summary>
+        /// 程序入口
+        /// </summary>
+        /// <param name="args"></param>
         public static void Main(string[] args)
         {
-            ///*
+            //*
             // Serilog WriteTo.File详解
             //    path：默认路径是程序的bin目录+path参数，当然也可以写绝对路径，只需要写入参数就可以了
             //    outputTemplate：日志模板，可以自定义
@@ -64,7 +69,7 @@ namespace FastStart.WebApi
             .WriteTo.Logger(lc => lc
                                 .Filter.ByIncludingOnly(e => e.Level == LogEventLevel.Error || e.Level == LogEventLevel.Fatal)
                                 .WriteTo.File(
-                                    $"Logs\\Exceptions\\exception-log-.txt", 
+                                    $"Logs\\Exceptions\\exception-log-.txt",
                                     rollingInterval: RollingInterval.Day,
                                     fileSizeLimitBytes: 52428800,
                                     retainedFileCountLimit: 180
@@ -80,7 +85,7 @@ namespace FastStart.WebApi
                 builder.Services.AddControllers(options =>
                 {
                     // 自定义一个一场拦截器，使响应结果能返回为指定格式。但该拦截器只能拦截控制器中的异常。
-                    options.Filters.Add(new CustomerExceptionFilter());
+                    options.Filters.Add<GlobalCustomerExceptionFilter>();
                 });
                 // 全局验权，要求每个控制器下的方法都要进行token验证，如果想关闭，方法上添加 [AllowAnonymous] 即可。
                 builder.Services.AddRazorPages().AddMvcOptions(option =>
@@ -135,11 +140,27 @@ namespace FastStart.WebApi
                 if (app.Environment.IsDevelopment())
                 {
                     app.UseSwagger();
-                    app.UseSwaggerUI();
+                    app.UseSwaggerUI(c =>
+                    {
+                        c.SwaggerEndpoint("/swagger/Login/swagger.json", "登录管理");
+                        c.SwaggerEndpoint("/swagger/SysMenu/swagger.json", "菜单管理");
+                        c.SwaggerEndpoint("/swagger/SysUser/swagger.json", "用户管理");
+                        c.SwaggerEndpoint("/swagger/SysRole/swagger.json", "角色管理");
+                        c.SwaggerEndpoint("/swagger/File/swagger.json", "文件管理");
+                        c.SwaggerEndpoint("/swagger/Product/swagger.json", "产品管理");
+                        c.SwaggerEndpoint("/swagger/Quartz/swagger.json", "定时任务");
+                        //配置文档的展开形式：List列表(默认)  None(折叠)  Full(展开到参数级别)
+                        c.DocExpansion(Swashbuckle.AspNetCore.SwaggerUI.DocExpansion.List);
+                    });
                 }
                 app.UseSerilogRequestLogging();
                 // 允许所有跨域，cors是在ConfigureServices方法中配置的跨域策略名称
                 app.UseCors("CorsPolicy");
+                app.MapGet("/", (HttpContext context) =>
+                {
+                    context.Response.Headers.Add("Access-Control-Allow-Origin", "*");
+                });
+
                 app.UseHttpsRedirection();
                 // 认证
                 app.UseAuthentication();

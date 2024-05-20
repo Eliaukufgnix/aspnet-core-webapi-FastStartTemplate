@@ -48,6 +48,12 @@ namespace FastStart.Domain.Entity
         public string Component { get; set; }
 
         /// <summary>
+        /// 重定向
+        ///</summary>
+        [SugarColumn(ColumnName = "redirect")]
+        public string Redirect { get; set; }
+
+        /// <summary>
         /// 路由参数
         ///</summary>
         [SugarColumn(ColumnName = "query")]

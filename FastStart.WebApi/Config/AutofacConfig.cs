@@ -1,5 +1,7 @@
 ﻿using Autofac;
+using FastStart.Quartz;
 using FastStart.Service.impl;
+using Quartz.Spi;
 using SqlSugar;
 using System.Reflection;
 
@@ -10,6 +12,10 @@ namespace FastStart.WebApi.Config
     /// </summary>
     public class AutofacConfig : Autofac.Module
     {
+        /// <summary>
+        /// Autofac加载
+        /// </summary>
+        /// <param name="builder"></param>
         protected override void Load(ContainerBuilder builder)
         {
             //程序集目录
@@ -30,8 +36,17 @@ namespace FastStart.WebApi.Config
             // 注入ISqlSugarClient
             builder.Register(c =>
             {
-                return SqlSugarConfig.AddSqlSugarModule(c.Resolve<IConfiguration>(), "MySql");
-            }).As<ISqlSugarClient>().SingleInstance();
+                return SqlSugarConfig.AddSqlSugarModule(c.Resolve<IConfiguration>(), "SqlServer");
+            }).As<ISqlSugarClient>().InstancePerLifetimeScope();
+            //自定义Job工厂
+            // services.AddSingleton<IJobFactory, ZeroJobFactory>();
+            builder.RegisterType<ZeroJobFactory>().As<IJobFactory>().SingleInstance();
+            //任务调度控制中心
+            // services.AddSingleton<ISchedulerCenter, SchedulerCenterServer>();
+            builder.RegisterType<SchedulerCenterServer>().As<ISchedulerCenter>().SingleInstance();
+            //Jobs,将组件好的Job放在这里，生命周期为瞬时的
+            // services.AddTransient<SendMailJob>();
+            builder.RegisterType<SendMailJob>().AsSelf().InstancePerDependency();
         }
     }
 }

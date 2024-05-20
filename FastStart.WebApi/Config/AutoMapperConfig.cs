@@ -17,6 +17,7 @@ namespace FastStart.WebApi.Config
             // 其他映射关系...
             cfg.CreateMap<SysUserVO, SysUser>();
             cfg.CreateMap<SysUser, SysUserVO>();
+            cfg.CreateMap<SysMenu, SysMenuVO>();
             // 2、使用时通过 IMapper 依赖注入
             // private readonly IMapper _mapper;
             //public MyController(IMapper mapper)

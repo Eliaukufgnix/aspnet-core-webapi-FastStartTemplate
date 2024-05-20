@@ -18,6 +18,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{A9A42633-B83
 		README.md = README.md
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FastStart.Quartz", "FastStart.Quartz\FastStart.Quartz.csproj", "{5CDD6538-0E09-4E7E-89F2-E8B653803560}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,6 +51,10 @@ Global
 		{D190EA68-F401-42E0-9582-27BF4D13A50C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D190EA68-F401-42E0-9582-27BF4D13A50C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D190EA68-F401-42E0-9582-27BF4D13A50C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5CDD6538-0E09-4E7E-89F2-E8B653803560}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5CDD6538-0E09-4E7E-89F2-E8B653803560}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5CDD6538-0E09-4E7E-89F2-E8B653803560}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5CDD6538-0E09-4E7E-89F2-E8B653803560}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -54,6 +65,7 @@ Global
 		{13D608B9-A811-4B66-B836-5900D44D4AFC} = {A9A42633-B83E-474B-A75B-08BCC908D672}
 		{C9E388EC-1E96-40C9-ABE5-244DC8436026} = {A9A42633-B83E-474B-A75B-08BCC908D672}
 		{D190EA68-F401-42E0-9582-27BF4D13A50C} = {A9A42633-B83E-474B-A75B-08BCC908D672}
+		{5CDD6538-0E09-4E7E-89F2-E8B653803560} = {A9A42633-B83E-474B-A75B-08BCC908D672}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {625F2B66-FE0D-444F-9647-31436D7ACE85}
