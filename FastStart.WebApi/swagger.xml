@@ -4,15 +4,53 @@
         <name>FastStart.WebApi</name>
     </assembly>
     <members>
-        <member name="M:FastStart.WebApi.Config.SqlSugarConfig.AddSqlSugarModule(Microsoft.Extensions.Configuration.IConfiguration,System.String)">
+        <member name="T:FastStart.WebApi.Config.AutofacConfig">
             <summary>
-            Sqlsugar注入
+            Autofac配置信息
             </summary>
-            <param name="Services"></param>
+        </member>
+        <member name="T:FastStart.WebApi.Config.AutoMapperConfig">
+            <summary>
+            AutoMapper配置信息
+            </summary>
+        </member>
+        <member name="T:FastStart.WebApi.Config.JwtBearerConfig">
+            <summary>
+            JwtBearer配置信息
+            </summary>
+        </member>
+        <member name="T:FastStart.WebApi.Config.SqlSugarConfig">
+            <summary>
+            SqlSugar配置
+            </summary>
+        </member>
+        <member name="T:FastStart.WebApi.Config.SwaggerConfig">
+            <summary>
+            Swagger配置
+            </summary>
+        </member>
+        <member name="T:FastStart.WebApi.Controllers.FileController">
+            <summary>
+            文件操作
+            </summary>
+        </member>
+        <member name="M:FastStart.WebApi.Controllers.FileController.FileUpload(System.Collections.Generic.List{Microsoft.AspNetCore.Http.IFormFile})">
+            <summary>
+            文件上传
+            </summary>
+            <param name="files"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FastStart.WebApi.Controllers.FileController.DownloadFile(System.String)">
+            <summary>
+            文件下载
+            </summary>
+            <param name="fileName"></param>
+            <returns></returns>
         </member>
         <member name="T:FastStart.WebApi.Controllers.LoginController">
             <summary>
-            登录接口
+            用户登录
             </summary>
         </member>
         <member name="M:FastStart.WebApi.Controllers.LoginController.Login(FastStart.Domain.Models.LoginBodyDTO)">
