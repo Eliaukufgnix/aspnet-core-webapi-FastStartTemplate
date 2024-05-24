@@ -60,6 +60,36 @@
             <param name="loginBodyDTO"></param>
             <returns></returns>
         </member>
+        <member name="M:FastStart.WebApi.Controllers.QuartzController.Start">
+            <summary>
+            开启任务调度
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FastStart.WebApi.Controllers.QuartzController.Stop">
+            <summary>
+            停止任务调度
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FastStart.WebApi.Controllers.QuartzController.AddJob">
+            <summary>
+            添加一个任务调度
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FastStart.WebApi.Controllers.QuartzController.StopJob">
+            <summary>
+            停止一个任务调度
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FastStart.WebApi.Controllers.QuartzController.ResumeJob">
+            <summary>
+            恢复一个任务调度
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:FastStart.WebApi.Controllers.SysUserController">
             <summary>
             用户管理
