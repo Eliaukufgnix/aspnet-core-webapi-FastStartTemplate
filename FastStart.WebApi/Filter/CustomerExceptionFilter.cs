@@ -3,13 +3,14 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Newtonsoft.Json;
 using Serilog;
+using System.Text;
 
 namespace FastStart.WebApi.Filter
 {
     /// <summary>
-    /// 自定义异常过滤器
+    /// 全局自定义异常过滤器
     /// </summary>
-    public class CustomerExceptionFilter : IExceptionFilter
+    public class GlobalCustomerExceptionFilter : IExceptionFilter
     {
         /// <summary>
         /// 重写OnExceptionAsync方法，定义自己的处理逻辑
@@ -22,7 +23,13 @@ namespace FastStart.WebApi.Filter
             if (context.ExceptionHandled == false)
             {
                 // 记录异常信息和堆栈跟踪
-                Log.Error("An unhandled exception has occurred:"+ context.Exception);
+                StringBuilder exMsg = new();
+                exMsg.AppendLine();
+                exMsg.AppendLine($"【异常方法:】{context.HttpContext.Request.Path}");
+                exMsg.AppendLine($"【请求类型:】{context.HttpContext.Request.Method}");
+                exMsg.AppendLine($"【异常错误:】{context.Exception.Message}");
+                exMsg.AppendLine($"【堆栈跟踪:】{context.Exception.StackTrace}");
+                Log.Error(exMsg.ToString());
                 // 定义返回类型
                 int code = context.Exception is FastStart.Common.Exception.BaseException baseException ? baseException.Code : default;
                 ResultModel<List<object>> result = code == 0 ? ResultModel<List<object>>.Fail(context.Exception.Message) : ResultModel<List<object>>.Fail(code, context.Exception.Message);

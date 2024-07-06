@@ -8,8 +8,9 @@ namespace FastStart.WebApi.Controllers
     /// <summary>
     /// Quartz定时调度
     /// </summary>
-    [Route("api/[controller]")]
+    [Route("dev-api/[controller]")]
     [ApiController]
+    [ApiExplorerSettings(GroupName = "Quartz")]
     public class QuartzController : ControllerBase
     {
         private readonly ISchedulerCenter _center;

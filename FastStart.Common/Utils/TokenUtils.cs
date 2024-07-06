@@ -36,8 +36,10 @@ namespace FastStart.Common.Utils
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.UTF8.GetBytes(Secret);
             var claimsIdentity = new ClaimsIdentity(new[] {
-                new Claim(ClaimTypes.Sid, tokenDTO.UserId.ToString()),
-                new Claim(ClaimTypes.Name, tokenDTO.UserName)
+                new Claim("userId", tokenDTO.UserId.ToString()),
+                new Claim("username", tokenDTO.UserName),
+                new Claim("roleId", tokenDTO.RoleId.ToString())
+
             });
             var signingCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature);
             var tokenDescriptor = new SecurityTokenDescriptor
@@ -79,15 +81,15 @@ namespace FastStart.Common.Utils
             SecurityToken validatedToken;
             ClaimsPrincipal principal = tokenHandler.ValidateToken(token, validationParameters, out validatedToken);
             // 提取 token 信息
-            long userId = Convert.ToInt64(principal.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Sid)?.Value);
-            string? userName = principal.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value;
-            //string? roleName = principal.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role)?.Value;
+            long userId = Convert.ToInt64(principal.Claims.FirstOrDefault(c => c.Type == "userId")?.Value);
+            string? userName = principal.Claims.FirstOrDefault(c => c.Type == "username")?.Value;
+            long roleId = Convert.ToInt64(principal.Claims.FirstOrDefault(c => c.Type == "roleId")?.Value);
             // 创建 TokenDTO 对象
             return new TokenDTO
             {
                 UserId = userId,
                 UserName = userName,
-                //RoleName = roleName
+                RoleId = roleId
             };
         }
         #endregion

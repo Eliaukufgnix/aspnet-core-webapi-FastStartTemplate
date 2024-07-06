@@ -25,8 +25,14 @@ namespace FastStart.WebApi.Config
                 {
                     // 打印sql
                     Console.WriteLine(sql + "\r\n" +db.Utilities.SerializeObject(pars.ToDictionary(it => it.ParameterName, it => it.Value)));
-                    // 记录sql，使用 ForContext 添加 "SqlLog" 属性
-                    Log.ForContext("SqlLog", true).Information(sql + "\r\n" + db.Utilities.SerializeObject(pars.ToDictionary(it => it.ParameterName, it => it.Value)));
+                };
+                // sql执行完毕后
+                db.Aop.OnLogExecuted = (sql, pars) =>
+                {
+                    // sql执行时间
+                    Console.WriteLine("\r\ntime:" + db.Ado.SqlExecutionTime.ToString());
+                    // 记录sql执行时间，使用 ForContext 添加 "SqlLog" 属性
+                    Log.ForContext("SqlLog", true).Information("\r\n" + sql + "\r\n" + db.Utilities.SerializeObject(pars.ToDictionary(it => it.ParameterName, it => it.Value))+"\r\ntime:" + db.Ado.SqlExecutionTime.ToString());
                 };
             });
         }

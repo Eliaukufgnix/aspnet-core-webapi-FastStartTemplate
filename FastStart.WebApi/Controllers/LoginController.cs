@@ -11,6 +11,7 @@ namespace FastStart.WebApi.Controllers
     /// </summary>
     [Route("dev-api/[controller]")]
     [ApiController]
+    [ApiExplorerSettings(GroupName = "Login")]
     public class LoginController : ControllerBase
     {
         private readonly ILogger<LoginController> logger;
@@ -37,6 +38,18 @@ namespace FastStart.WebApi.Controllers
             return ResultModel<List<TokenVM>>.Success(new List<TokenVM> { new TokenVM { token = token } });
         }
 
+        /// <summary>
+        /// 退出登录
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("loginout")]
+        [AllowAnonymous]
+        public ResultModel<List<string>> LoginOut()
+        {
+            return ResultModel<List<string>>.Success();
+        }
+        
         [HttpPost]
         [Route("loginVerify")]
         public async Task<ResultModel<List<TokenDTO>>> LoginVerify(string token)

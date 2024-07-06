@@ -15,7 +15,7 @@ namespace FastStart.Service
 
         #endregion 构造
 
-        protected readonly IBaseRepository<T> baseRepository;
+        public IBaseRepository<T> baseRepository;
 
         public Task<bool> CreateEntityAsync(T entity)
         {
@@ -57,9 +57,14 @@ namespace FastStart.Service
             return baseRepository.GetEntitysByWhereAsync(expression);
         }
 
-        public List<T> GetEntitysToPage(int pageNumber, int pageSize, ref int totalCount)
+        public List<T> GetEntitysToPage(int pageIndex, int pageSize, ref int totalCount)
         {
-            return baseRepository.GetEntitysToPage(pageNumber, pageSize, ref totalCount);
+            return baseRepository.GetEntitysToPage(pageIndex, pageSize, ref totalCount);
+        }
+
+        public List<T> GetEntitysByWhereToPage(Expression<Func<T, bool>> expression,int pageIndex, int pageSize, ref int totalCount)
+        {
+            return baseRepository.GetEntitysByWhereToPage(expression,pageIndex, pageSize, ref totalCount);
         }
 
         public Task<bool> UpdateEntityAsync(T entity)

@@ -60,6 +60,29 @@
             <param name="loginBodyDTO"></param>
             <returns></returns>
         </member>
+        <member name="M:FastStart.WebApi.Controllers.LoginController.LoginOut">
+            <summary>
+            退出登录
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:FastStart.WebApi.Controllers.ProductController">
+            <summary>
+            产品管理
+            </summary>
+        </member>
+        <member name="M:FastStart.WebApi.Controllers.ProductController.GetProductByType(System.String)">
+            <summary>
+            通过类型获取产品信息
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="T:FastStart.WebApi.Controllers.QuartzController">
+            <summary>
+            Quartz定时调度
+            </summary>
+        </member>
         <member name="M:FastStart.WebApi.Controllers.QuartzController.Start">
             <summary>
             开启任务调度
@@ -90,6 +113,66 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="T:FastStart.WebApi.Controllers.SysMenuController">
+            <summary>
+            菜单管理
+            </summary>
+        </member>
+        <member name="M:FastStart.WebApi.Controllers.SysMenuController.Get">
+            <summary>
+            获取全部菜单信息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FastStart.WebApi.Controllers.SysMenuController.GetSysMenuToPage(System.Int32,System.Int32)">
+            <summary>
+            分页获取菜单信息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FastStart.WebApi.Controllers.SysMenuController.GetSysMenuById(System.Int32)">
+            <summary>
+            通过id获取菜单信息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FastStart.WebApi.Controllers.SysMenuController.AddSysMenu(FastStart.Domain.Entity.SysMenu)">
+            <summary>
+            添加菜单信息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FastStart.WebApi.Controllers.SysMenuController.DeleteSysMenu(System.Int32)">
+            <summary>
+            通过id删除单个菜单信息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FastStart.WebApi.Controllers.SysMenuController.DeleteSysMenuList(System.Object[])">
+            <summary>
+            多选后通过ids进行批量删除
+            </summary>
+            <param name="ids">id数组</param>
+            <returns></returns>
+        </member>
+        <member name="M:FastStart.WebApi.Controllers.SysMenuController.UpdateSysMenu(FastStart.Domain.Entity.SysMenu)">
+            <summary>
+            更新菜单信息
+            </summary>
+            <param name="sysMenu">更新后的新实体信息</param>
+            <returns></returns>
+        </member>
+        <member name="T:FastStart.WebApi.Controllers.SysRoleController">
+            <summary>
+            角色管理
+            </summary>
+        </member>
+        <member name="M:FastStart.WebApi.Controllers.SysRoleController.Get">
+            <summary>
+            获取全部角色信息
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:FastStart.WebApi.Controllers.SysUserController">
             <summary>
             用户管理
@@ -101,13 +184,13 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:FastStart.WebApi.Controllers.SysUserController.GetSysUserToPage(System.Int32,System.Int32)">
+        <member name="M:FastStart.WebApi.Controllers.SysUserController.GetSysUserByWhereToPage(FastStart.Domain.Models.SysUserDTO)">
             <summary>
-            分页获取用户信息
+            带条件分页查询获取用户信息
             </summary>
             <returns></returns>
         </member>
-        <member name="M:FastStart.WebApi.Controllers.SysUserController.GetSysUserById(System.Int32)">
+        <member name="M:FastStart.WebApi.Controllers.SysUserController.GetSysUserById(System.Object)">
             <summary>
             通过id获取用户信息
             </summary>
@@ -125,7 +208,7 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:FastStart.WebApi.Controllers.SysUserController.DeleteSysUserList(System.Object[])">
+        <member name="M:FastStart.WebApi.Controllers.SysUserController.DeleteSysUserList(FastStart.Domain.Models.IdsDTO)">
             <summary>
             多选后通过ids进行批量删除
             </summary>
@@ -139,12 +222,12 @@
             <param name="sysUser">更新后的新实体信息</param>
             <returns></returns>
         </member>
-        <member name="T:FastStart.WebApi.Filter.CustomerExceptionFilter">
+        <member name="T:FastStart.WebApi.Filter.GlobalCustomerExceptionFilter">
             <summary>
-            自定义异常过滤器
+            全局自定义异常过滤器
             </summary>
         </member>
-        <member name="M:FastStart.WebApi.Filter.CustomerExceptionFilter.Microsoft#AspNetCore#Mvc#Filters#IExceptionFilter#OnException(Microsoft.AspNetCore.Mvc.Filters.ExceptionContext)">
+        <member name="M:FastStart.WebApi.Filter.GlobalCustomerExceptionFilter.Microsoft#AspNetCore#Mvc#Filters#IExceptionFilter#OnException(Microsoft.AspNetCore.Mvc.Filters.ExceptionContext)">
             <summary>
             重写OnExceptionAsync方法，定义自己的处理逻辑
             </summary>

@@ -6,6 +6,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
     <DocumentationFile>swagger.xml</DocumentationFile>
+	<ErrorOnDuplicatePublishOutputFiles>false</ErrorOnDuplicatePublishOutputFiles>
   </PropertyGroup>
 
   <ItemGroup>

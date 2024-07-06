@@ -37,7 +37,7 @@ namespace FastStart.Domain.Entity
         /// 默认值: 00
         ///</summary>
         [SugarColumn(ColumnName = "user_type")]
-        public string UserType { get; set; }
+        public string UserType { get; set; } = "00";
 
         /// <summary>
         /// 用户邮箱
@@ -58,7 +58,7 @@ namespace FastStart.Domain.Entity
         /// 默认值: 0
         ///</summary>
         [SugarColumn(ColumnName = "sex")]
-        public string Sex { get; set; }
+        public string Sex { get; set; } = "0";
 
         /// <summary>
         /// 头像地址
@@ -79,14 +79,14 @@ namespace FastStart.Domain.Entity
         /// 默认值: 0
         ///</summary>
         [SugarColumn(ColumnName = "status")]
-        public string Status { get; set; }
+        public string Status { get; set; } = "0";
 
         /// <summary>
         /// 删除标志（0代表存在 2代表删除）
         /// 默认值: 0
         ///</summary>
         [SugarColumn(ColumnName = "del_flag")]
-        public string DelFlag { get; set; }
+        public string DelFlag { get; set; } = "0";
 
         /// <summary>
         /// 最后登录IP
@@ -99,7 +99,7 @@ namespace FastStart.Domain.Entity
         /// 最后登录时间
         ///</summary>
         [SugarColumn(ColumnName = "login_date")]
-        public DateTime? LoginDate { get; set; }
+        public DateTime? LoginDate { get; set; } = DateTime.Now;
 
         /// <summary>
         /// 创建者
@@ -131,6 +131,6 @@ namespace FastStart.Domain.Entity
         /// 备注
         ///</summary>
         [SugarColumn(ColumnName = "remark")]
-        public string Remark { get; set; }
+        public string? Remark { get; set; }
     }
 }

@@ -1,14 +1,15 @@
-# Ò»¸öÊ¹ÓÃ.NET 6¿ìËÙ¹¹½¨WebAPIÏîÄ¿µÄÄ£°å¡£
+# ä¸€ä¸ªä½¿ç”¨.NET 6å¿«é€Ÿæ„å»ºWebAPIé¡¹ç›®çš„æ¨¡æ¿ã€‚
 
-## ¼¼ÊõÕ»
-.NET 6¡¢ASP.NET Core WebAPI¡¢SqlSugar¡¢MySQL¡¢Swagger¡¢JWT¡¢AutoMapper¡¢Autofac¡¢Serilog
+## æŠ€æœ¯æ ˆ
+.NET 6ã€ASP.NET Core WebAPIã€SqlSugarã€MySQLã€Swaggerã€JWTã€AutoMapperã€Autofacã€Serilogã€Quartz.NET
 
-## ²Î¿¼ÎÄµµ
+## å‚è€ƒæ–‡æ¡£
 
-- ASP.NET Core in .NET 6.0£ºhttps://learn.microsoft.com/zh-cn/aspnet/core/fundamentals/apis?view=aspnetcore-6.0
-- SqlSugar£ºhttps://www.donet5.com/
-- Swagger£ºhttps://swagger.io/
-- JWT£ºhttps://jwt.io/
-- AutoMapper£ºhttps://automapper.org/
-- Autofac£ºhttps://autofac.org/
-- Serilog£ºhttps://serilog.net/
+- ASP.NET Core in .NET 6.0ï¼šhttps://learn.microsoft.com/zh-cn/aspnet/core/fundamentals/apis?view=aspnetcore-6.0
+- SqlSugarï¼šhttps://www.donet5.com/
+- Swaggerï¼šhttps://swagger.io/
+- JWTï¼šhttps://jwt.io/
+- AutoMapperï¼šhttps://automapper.org/
+- Autofacï¼šhttps://autofac.org/
+- Serilogï¼šhttps://serilog.net/
+- Quartz.NETï¼šhttps://www.quartz-scheduler.net/

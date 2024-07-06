@@ -8,8 +8,9 @@ namespace FastStart.WebApi.Controllers
     /// <summary>
     /// 文件操作
     /// </summary>
-    [Route("api/[controller]")]
+    [Route("dev-api/[controller]")]
     [ApiController]
+    [ApiExplorerSettings(GroupName = "File")]
     public class FileController : ControllerBase
     {
         private readonly HashSet<string> _fileHashes = new HashSet<string>();
@@ -26,7 +27,7 @@ namespace FastStart.WebApi.Controllers
         /// </summary>
         /// <param name="files"></param>
         /// <returns></returns>
-        [HttpPost("/fileUpload")]
+        [HttpPost("fileUpload")]
         public async Task<ResultModel<bool>> FileUpload(List<IFormFile> files)
         {
             if (files == null || !files.Any())
@@ -84,7 +85,7 @@ namespace FastStart.WebApi.Controllers
         /// </summary>
         /// <param name="fileName"></param>
         /// <returns></returns>
-        [HttpGet("/downloadFile/{fileName}")]
+        [HttpGet("downloadFile/{fileName}")]
         public IActionResult DownloadFile(string fileName)
         {
             var filePath = Path.Combine(Directory.GetCurrentDirectory(), "fileuploads", fileName);
