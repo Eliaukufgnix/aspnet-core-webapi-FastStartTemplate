@@ -1,14 +1,9 @@
-﻿using Autofac.Features.Metadata;
-using AutoMapper;
+﻿using AutoMapper;
 using FastStart.Domain;
 using FastStart.Domain.Entity;
 using FastStart.Domain.Models;
 using FastStart.Service;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.IO;
 
 namespace FastStart.WebApi.Controllers
 {

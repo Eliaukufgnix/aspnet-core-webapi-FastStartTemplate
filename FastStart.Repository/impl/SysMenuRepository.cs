@@ -82,8 +82,6 @@ namespace FastStart.Repository.impl
             {
                 throw;
             }
-
-
         }
     }
 }

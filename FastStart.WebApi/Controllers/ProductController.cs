@@ -1,6 +1,7 @@
 ﻿using FastStart.Domain;
 using FastStart.Domain.Entity;
 using FastStart.Service;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SqlSugar;
 
@@ -28,14 +29,10 @@ namespace FastStart.WebApi.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("GetProductByType")]
+        [AllowAnonymous]
         public async Task<ResultModel<List<Product>>> GetProductByType(string type)
         {
-            Expressionable<Product> expressionable = Expressionable.Create<Product>();
-            if (!string.IsNullOrEmpty(type))
-            {
-                expressionable.And(x => x.Type.ToString() == type);
-            }
-            List<Product> products = await productService.GetEntitysByWhereAsync(expressionable.ToExpression());
+            List<Product> products = await productService.GetProductByType(type);
             return ResultModel<List<Product>>.Success(products);
         }
     }

@@ -3,7 +3,6 @@ using FastStart.Domain;
 using FastStart.Domain.Entity;
 using FastStart.Domain.Models;
 using FastStart.Service;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SqlSugar;
 
@@ -31,7 +30,6 @@ namespace FastStart.WebApi.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        [AllowAnonymous]
         [Route("GetAllSysUser")]
         public async Task<ResultModel<List<SysUserVO>>> Get()
         {
@@ -45,7 +43,6 @@ namespace FastStart.WebApi.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        [AllowAnonymous]
         [Route("GetSysUserByWhereToPage")]
         public ResultModel<SelectByPageVO<SysUser>> GetSysUserByWhereToPage([FromQuery] SysUserDTO queryParameters)
         {
@@ -63,7 +60,7 @@ namespace FastStart.WebApi.Controllers
             SelectByPageVO<SysUser> selectByPageVO = new(sysUsers, totalCount);
             return ResultModel<SelectByPageVO<SysUser>>.Success(selectByPageVO);
         }
-        private void AddCondition<T>(Expressionable<T> expressionable, string parameter, Func<T, string> propertySelector) where T : class,new()
+        private void AddCondition<T>(Expressionable<T> expressionable, string parameter, Func<T, string> propertySelector) where T : class, new()
         {
             if (!string.IsNullOrEmpty(parameter))
             {
@@ -76,9 +73,9 @@ namespace FastStart.WebApi.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("GetSysUserById")]
-        public async Task<ResultModel<SysUser>> GetSysUserById(object id)
+        public async Task<ResultModel<SysUser>> GetSysUserById([FromQuery]string id)
         {
-            if (id == null)
+            if (string.IsNullOrEmpty(id))
                 return ResultModel<SysUser>.Fail("参数不能为空");
             SysUser sysUser = await sysUserService.GetEntityByWhereAsync(x => x.UserId.Equals(id));
             return ResultModel<SysUser>.Success(sysUser);
@@ -89,7 +86,6 @@ namespace FastStart.WebApi.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPost]
-        [AllowAnonymous]
         [Route("AddSysUser")]
         public async Task<ResultModel<bool>> AddSysUser([FromBody] SysUser sysUser)
         {
@@ -117,7 +113,6 @@ namespace FastStart.WebApi.Controllers
         /// <param name="ids">id数组</param>
         /// <returns></returns>
         [HttpDelete]
-        [AllowAnonymous]
         [Route("DeleteSysUserList")]
         public async Task<ResultModel<int>> DeleteSysUserList([FromBody] IdsDTO dto)
         {
@@ -133,7 +128,6 @@ namespace FastStart.WebApi.Controllers
         /// <param name="sysUser">更新后的新实体信息</param>
         /// <returns></returns>
         [HttpPut]
-        [AllowAnonymous]
         [Route("UpdateSysUser")]
         public async Task<ResultModel<bool>> UpdateSysUser([FromBody] SysUser sysUser)
         {

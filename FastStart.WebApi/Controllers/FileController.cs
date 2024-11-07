@@ -1,4 +1,5 @@
 ﻿using FastStart.Domain;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Serilog;
 using System.Security.Cryptography;
@@ -28,6 +29,7 @@ namespace FastStart.WebApi.Controllers
         /// <param name="files"></param>
         /// <returns></returns>
         [HttpPost("fileUpload")]
+        [AllowAnonymous]
         public async Task<ResultModel<bool>> FileUpload(List<IFormFile> files)
         {
             if (files == null || !files.Any())

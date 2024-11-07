@@ -13,8 +13,15 @@
         public const string Audience = "Eliaukufgnix";
 
         /// <summary>
-        /// 密钥
+        /// accessToken密钥
         /// </summary>
-        public const string Secret = "OFRC1j9aaR2BvADxNWlG2pmuD392UfQBZZLM1fuzDEzDlEpSsnbtrpJKd3FfY855OMA9oK4Mc8y48eYUrVUSw==";
+        /// Bujing123... base 64 5次
+        public const string AccessTokenSecret = "Vmxaak1WWXlUbGhTYkdoUFZucFdUMVpyVm5OT2JGSklZWHBDYTFWVU1Eaz0=";
+
+        /// <summary>
+        /// refreshToken密钥
+        /// </summary>
+        /// Eliaukufgnix base 64 5次
+        public const string RefreshTokenSecret = "VmxkNGEwNUhUa2RpUm14WFltdHdjbFpxUm5ka1ZteDBUVmhPVDFGVU1Eaz0=";
     }
 }
