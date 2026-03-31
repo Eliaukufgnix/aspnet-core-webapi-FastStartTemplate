@@ -14,15 +14,15 @@ namespace FastStart.Service.impl
     {
         #region 依赖注入
 
-        private readonly ISysUserRepository sysUserRepository;
-        private readonly ISysUserRoleRepository sysUserRoleRepository;
+        private readonly IBaseRepository<SysUser> sysUserRepository;
+        private readonly IBaseRepository<SysUserRole> sysUserRoleRepository;
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="_sysUserRepository"></param>
         /// <param name="_sysUserRoleRepository"></param>
-        public LoginService(ISysUserRepository _sysUserRepository, ISysUserRoleRepository _sysUserRoleRepository)
+        public LoginService(IBaseRepository<SysUser> _sysUserRepository, IBaseRepository<SysUserRole> _sysUserRoleRepository)
         {
             sysUserRepository = _sysUserRepository;
             sysUserRoleRepository = _sysUserRoleRepository;
@@ -81,7 +81,7 @@ namespace FastStart.Service.impl
         }
 
         /// <summary>
-        /// 刷新token 
+        /// 刷新token
         /// </summary>
         /// <param name="refreshToken"></param>
         /// <returns></returns>

@@ -17,7 +17,7 @@ namespace FastStart.WebApi.Controllers
     [ApiExplorerSettings(GroupName = "SysUser")]
     public class SysUserController : ControllerBase
     {
-        private readonly ISysUserService sysUserService;
+        private readonly IBaseService<SysUser> sysUserService;
         private readonly IMapper mapper;
 
         /// <summary>
@@ -25,7 +25,7 @@ namespace FastStart.WebApi.Controllers
         /// </summary>
         /// <param name="_sysUserService"></param>
         /// <param name="_mapper"></param>
-        public SysUserController(ISysUserService _sysUserService, IMapper _mapper)
+        public SysUserController(IBaseService<SysUser> _sysUserService, IMapper _mapper)
         {
             sysUserService = _sysUserService;
             mapper = _mapper;

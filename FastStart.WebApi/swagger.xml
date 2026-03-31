@@ -269,7 +269,7 @@
             角色管理
             </summary>
         </member>
-        <member name="M:FastStart.WebApi.Controllers.SysRoleController.#ctor(FastStart.Service.ISysRoleService,AutoMapper.IMapper)">
+        <member name="M:FastStart.WebApi.Controllers.SysRoleController.#ctor(FastStart.Service.IBaseService{FastStart.Domain.Entity.SysRole},AutoMapper.IMapper)">
             <summary>
             
             </summary>
@@ -287,7 +287,7 @@
             用户管理
             </summary>
         </member>
-        <member name="M:FastStart.WebApi.Controllers.SysUserController.#ctor(FastStart.Service.ISysUserService,AutoMapper.IMapper)">
+        <member name="M:FastStart.WebApi.Controllers.SysUserController.#ctor(FastStart.Service.IBaseService{FastStart.Domain.Entity.SysUser},AutoMapper.IMapper)">
             <summary>
             
             </summary>

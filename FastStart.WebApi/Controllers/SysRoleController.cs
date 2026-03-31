@@ -14,7 +14,7 @@ namespace FastStart.WebApi.Controllers
     [ApiExplorerSettings(GroupName = "SysRole")]
     public class SysRoleController : ControllerBase
     {
-        private readonly ISysRoleService sysRoleService;
+        private readonly IBaseService<SysRole> sysRoleService;
         private readonly IMapper mapper;
 
         /// <summary>
@@ -22,7 +22,7 @@ namespace FastStart.WebApi.Controllers
         /// </summary>
         /// <param name="_sysRoleService"></param>
         /// <param name="_mapper"></param>
-        public SysRoleController(ISysRoleService _sysRoleService, IMapper _mapper)
+        public SysRoleController(IBaseService<SysRole> _sysRoleService, IMapper _mapper)
         {
             sysRoleService = _sysRoleService;
             mapper = _mapper;

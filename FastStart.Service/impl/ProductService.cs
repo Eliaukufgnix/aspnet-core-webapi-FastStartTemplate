@@ -6,11 +6,11 @@ namespace FastStart.Service.impl
 {
     public class ProductService : BaseService<Product>, IProductService
     {
-        private readonly IProductRepository productRepository;
+        private readonly IBaseRepository<Product> productRepository;
 
-        public ProductService(IBaseRepository<Product> _baseRepository, IProductRepository _productRepository) : base(_baseRepository)
+        public ProductService(IBaseRepository<Product> _baseRepository) : base(_baseRepository)
         {
-            productRepository = _productRepository;
+            productRepository  = _baseRepository;
         }
 
         public Task<List<Product>> GetProductByType(string type)
