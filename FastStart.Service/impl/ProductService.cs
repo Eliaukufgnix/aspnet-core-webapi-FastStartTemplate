@@ -18,7 +18,7 @@ namespace FastStart.Service.impl
             Expressionable<Product> expressionable = Expressionable.Create<Product>();
             if (!string.IsNullOrEmpty(type))
             {
-                expressionable.And(x => x.Type.ToString() == type);
+                expressionable.And(x => x.Type != null && x.Type.ToString() == type);
             }
             Task<List<Product>> task = productRepository.GetEntitysByWhereAsync(expressionable.ToExpression());
             return task;

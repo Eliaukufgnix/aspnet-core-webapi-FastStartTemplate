@@ -9,6 +9,9 @@ namespace FastStart.WebApi.Controllers
     [ApiController]
     public class GenerateCodeController : ControllerBase
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public void GenerateCode()
         {
         }

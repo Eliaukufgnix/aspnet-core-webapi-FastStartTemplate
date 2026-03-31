@@ -24,76 +24,76 @@ namespace FastStart.Domain.Entity
         /// 用户账号
         ///</summary>
         [SugarColumn(ColumnName = "user_name")]
-        public string UserName { get; set; }
+        public string? UserName { get; set; }
 
         /// <summary>
         /// 用户昵称
         ///</summary>
         [SugarColumn(ColumnName = "nick_name")]
-        public string NickName { get; set; }
+        public string? NickName { get; set; }
 
         /// <summary>
         /// 用户类型（00系统用户）
         /// 默认值: 00
         ///</summary>
         [SugarColumn(ColumnName = "user_type")]
-        public string UserType { get; set; } = "00";
+        public string? UserType { get; set; } = "00";
 
         /// <summary>
         /// 用户邮箱
         /// 默认值:
         ///</summary>
         [SugarColumn(ColumnName = "email")]
-        public string Email { get; set; }
+        public string? Email { get; set; }
 
         /// <summary>
         /// 手机号码
         /// 默认值:
         ///</summary>
         [SugarColumn(ColumnName = "phonenumber")]
-        public string Phonenumber { get; set; }
+        public string? Phonenumber { get; set; }
 
         /// <summary>
         /// 用户性别（0男 1女 2未知）
         /// 默认值: 0
         ///</summary>
         [SugarColumn(ColumnName = "sex")]
-        public string Sex { get; set; } = "0";
+        public string? Sex { get; set; } = "0";
 
         /// <summary>
         /// 头像地址
         /// 默认值:
         ///</summary>
         [SugarColumn(ColumnName = "avatar")]
-        public string Avatar { get; set; }
+        public string? Avatar { get; set; }
 
         /// <summary>
         /// 密码
         /// 默认值:
         ///</summary>
         [SugarColumn(ColumnName = "password")]
-        public string Password { get; set; }
+        public string? Password { get; set; }
 
         /// <summary>
         /// 帐号状态（0正常 1停用）
         /// 默认值: 0
         ///</summary>
         [SugarColumn(ColumnName = "status")]
-        public string Status { get; set; } = "0";
+        public string? Status { get; set; } = "0";
 
         /// <summary>
         /// 删除标志（0代表存在 2代表删除）
         /// 默认值: 0
         ///</summary>
         [SugarColumn(ColumnName = "del_flag")]
-        public string DelFlag { get; set; } = "0";
+        public string? DelFlag { get; set; } = "0";
 
         /// <summary>
         /// 最后登录IP
         /// 默认值:
         ///</summary>
         [SugarColumn(ColumnName = "login_ip")]
-        public string LoginIp { get; set; }
+        public string? LoginIp { get; set; }
 
         /// <summary>
         /// 最后登录时间
@@ -106,7 +106,7 @@ namespace FastStart.Domain.Entity
         /// 默认值:
         ///</summary>
         [SugarColumn(ColumnName = "create_by")]
-        public string CreateBy { get; set; }
+        public string? CreateBy { get; set; }
 
         /// <summary>
         /// 创建时间
@@ -119,7 +119,7 @@ namespace FastStart.Domain.Entity
         /// 默认值:
         ///</summary>
         [SugarColumn(ColumnName = "update_by")]
-        public string UpdateBy { get; set; }
+        public string? UpdateBy { get; set; }
 
         /// <summary>
         /// 更新时间

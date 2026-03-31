@@ -73,31 +73,39 @@ namespace FastStart.WebApi.Controllers
         /// </summary>
         /// <param name="queryParameters"></param>
         /// <returns></returns>
-        private static Expression<Func<SysUser, bool>> BuildQueryExpression(SysUserDTO queryParameters)
+        private static Expression<Func<SysUser, bool>> BuildQueryExpression(SysUserDTO? queryParameters)
         {
+            // 参数为 null 时返回无条件表达式（查询所有记录）
+            if (queryParameters == null)
+            {
+                return x => true;
+            }
+
             var expressionable = Expressionable.Create<SysUser>();
+
             if (!string.IsNullOrEmpty(queryParameters.UserName))
             {
-                expressionable.And(x => x.UserName.Contains(queryParameters.UserName));
+                expressionable.And(x =>x.UserName != null && x.UserName.Contains(queryParameters.UserName));
             }
             if (!string.IsNullOrEmpty(queryParameters.NickName))
             {
-                expressionable.And(x => x.NickName.Contains(queryParameters.NickName));
+                expressionable.And(x => x.NickName != null && x.NickName.Contains(queryParameters.NickName));
             }
             if (!string.IsNullOrEmpty(queryParameters.Phonenumber))
             {
-                expressionable.And(x => x.Phonenumber.Contains(queryParameters.Phonenumber));
+                expressionable.And(x => x.Phonenumber != null && x.Phonenumber.Contains(queryParameters.Phonenumber));
             }
-
             if (!string.IsNullOrEmpty(queryParameters.Email))
             {
-                expressionable.And(x => x.Email.Contains(queryParameters.Email));
+                expressionable.And(x => x.Email != null && x.Email.Contains(queryParameters.Email));
             }
             if (!string.IsNullOrEmpty(queryParameters.Sex))
             {
                 expressionable.And(x => x.Sex == queryParameters.Sex);
             }
-            return expressionable.ToExpression();
+
+            var expression = expressionable.ToExpression();
+            return expression ?? (x => true);
         }
 
         /// <summary>

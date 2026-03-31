@@ -26,14 +26,14 @@ namespace FastStart.Domain.Entity
         /// 默认值:
         ///</summary>
         [SugarColumn(ColumnName = "ancestors")]
-        public string Ancestors { get; set; }
+        public string? Ancestors { get; set; }
 
         /// <summary>
         /// 部门名称
         /// 默认值:
         ///</summary>
         [SugarColumn(ColumnName = "dept_name")]
-        public string DeptName { get; set; }
+        public string? DeptName { get; set; }
 
         /// <summary>
         /// 显示顺序
@@ -46,40 +46,40 @@ namespace FastStart.Domain.Entity
         /// 负责人
         ///</summary>
         [SugarColumn(ColumnName = "leader")]
-        public string Leader { get; set; }
+        public string? Leader { get; set; }
 
         /// <summary>
         /// 联系电话
         ///</summary>
         [SugarColumn(ColumnName = "phone")]
-        public string Phone { get; set; }
+        public string? Phone { get; set; }
 
         /// <summary>
         /// 邮箱
         ///</summary>
         [SugarColumn(ColumnName = "email")]
-        public string Email { get; set; }
+        public string? Email { get; set; }
 
         /// <summary>
         /// 部门状态（0正常 1停用）
         /// 默认值: 0
         ///</summary>
         [SugarColumn(ColumnName = "status")]
-        public string Status { get; set; }
+        public string? Status { get; set; }
 
         /// <summary>
         /// 删除标志（0代表存在 2代表删除）
         /// 默认值: 0
         ///</summary>
         [SugarColumn(ColumnName = "del_flag")]
-        public string DelFlag { get; set; }
+        public string? DelFlag { get; set; }
 
         /// <summary>
         /// 创建者
         /// 默认值:
         ///</summary>
         [SugarColumn(ColumnName = "create_by")]
-        public string CreateBy { get; set; }
+        public string? CreateBy { get; set; }
 
         /// <summary>
         /// 创建时间
@@ -92,7 +92,7 @@ namespace FastStart.Domain.Entity
         /// 默认值:
         ///</summary>
         [SugarColumn(ColumnName = "update_by")]
-        public string UpdateBy { get; set; }
+        public string? UpdateBy { get; set; }
 
         /// <summary>
         /// 更新时间

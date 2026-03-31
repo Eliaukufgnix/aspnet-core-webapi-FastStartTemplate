@@ -2,6 +2,6 @@
 {
     public class IdsDTO
     {
-        public long[] Ids { get; set; }
+        public long[]? Ids { get; set; }
     }
 }

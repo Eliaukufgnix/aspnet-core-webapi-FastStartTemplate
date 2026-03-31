@@ -26,54 +26,54 @@ namespace FastStart.Domain.Entity
         /// 默认值:
         ///</summary>
         [SugarColumn(ColumnName = "dict_label")]
-        public string DictLabel { get; set; }
+        public string? DictLabel { get; set; }
 
         /// <summary>
         /// 字典键值
         /// 默认值:
         ///</summary>
         [SugarColumn(ColumnName = "dict_value")]
-        public string DictValue { get; set; }
+        public string? DictValue { get; set; }
 
         /// <summary>
         /// 字典类型
         /// 默认值:
         ///</summary>
         [SugarColumn(ColumnName = "dict_type")]
-        public string DictType { get; set; }
+        public string? DictType { get; set; }
 
         /// <summary>
         /// 样式属性（其他样式扩展）
         ///</summary>
         [SugarColumn(ColumnName = "css_class")]
-        public string CssClass { get; set; }
+        public string? CssClass { get; set; }
 
         /// <summary>
         /// 表格回显样式
         ///</summary>
         [SugarColumn(ColumnName = "list_class")]
-        public string ListClass { get; set; }
+        public string? ListClass { get; set; }
 
         /// <summary>
         /// 是否默认（Y是 N否）
         /// 默认值: N
         ///</summary>
         [SugarColumn(ColumnName = "is_default")]
-        public string IsDefault { get; set; }
+        public string? IsDefault { get; set; }
 
         /// <summary>
         /// 状态（0正常 1停用）
         /// 默认值: 0
         ///</summary>
         [SugarColumn(ColumnName = "status")]
-        public string Status { get; set; }
+        public string? Status { get; set; }
 
         /// <summary>
         /// 创建者
         /// 默认值:
         ///</summary>
         [SugarColumn(ColumnName = "create_by")]
-        public string CreateBy { get; set; }
+        public string? CreateBy { get; set; }
 
         /// <summary>
         /// 创建时间
@@ -86,7 +86,7 @@ namespace FastStart.Domain.Entity
         /// 默认值:
         ///</summary>
         [SugarColumn(ColumnName = "update_by")]
-        public string UpdateBy { get; set; }
+        public string? UpdateBy { get; set; }
 
         /// <summary>
         /// 更新时间
@@ -98,6 +98,6 @@ namespace FastStart.Domain.Entity
         /// 备注
         ///</summary>
         [SugarColumn(ColumnName = "remark")]
-        public string Remark { get; set; }
+        public string? Remark { get; set; }
     }
 }

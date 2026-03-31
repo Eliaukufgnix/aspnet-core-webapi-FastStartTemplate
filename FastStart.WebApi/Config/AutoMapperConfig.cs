@@ -9,6 +9,10 @@ namespace FastStart.WebApi.Config
     /// </summary>
     public class AutoMapperConfig
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="cfg"></param>
         public static void Configure(IMapperConfigurationExpression cfg)
         {
             // 1、建立映射关系,左侧是原类型，右侧是目标类型

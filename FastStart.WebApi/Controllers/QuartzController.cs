@@ -15,6 +15,10 @@ namespace FastStart.WebApi.Controllers
     {
         private readonly ISchedulerCenter _center;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="center"></param>
         public QuartzController(ISchedulerCenter center)
         {
             _center = center;

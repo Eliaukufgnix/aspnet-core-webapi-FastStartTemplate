@@ -18,37 +18,37 @@ namespace FastStart.Domain.Entity
         /// 任务名称
         ///</summary>
         [SugarColumn(ColumnName = "quartz_name")]
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         /// <summary>
         /// 任务分组
         ///</summary>
         [SugarColumn(ColumnName = "quartz_job_group")]
-        public string JobGroup { get; set; }
+        public string? JobGroup { get; set; }
 
         /// <summary>
         /// 任务运行时间表达式
         ///</summary>
         [SugarColumn(ColumnName = "quartz_cron")]
-        public string Cron { get; set; }
+        public string? Cron { get; set; }
 
         /// <summary>
         /// 任务所在DLL对应的程序集名称
         ///</summary>
         [SugarColumn(ColumnName = "quartz_assembly_name")]
-        public string AssemblyName { get; set; }
+        public string? AssemblyName { get; set; }
 
         /// <summary>
         /// 任务所在类
         ///</summary>
         [SugarColumn(ColumnName = "quartz_class_name")]
-        public string ClassName { get; set; }
+        public string? ClassName { get; set; }
 
         /// <summary>
         /// 任务描述
         ///</summary>
         [SugarColumn(ColumnName = "quartz_remark")]
-        public string Remark { get; set; }
+        public string? Remark { get; set; }
 
         /// <summary>
         /// 执行次数
@@ -84,19 +84,19 @@ namespace FastStart.Domain.Entity
         /// 是否启动
         ///</summary>
         [SugarColumn(ColumnName = "quartz_is_start")]
-        public string IsStart { get; set; }
+        public string? IsStart { get; set; }
 
         /// <summary>
         /// 执行传参
         ///</summary>
         [SugarColumn(ColumnName = "quartz_job_params")]
-        public string JobParams { get; set; }
+        public string? JobParams { get; set; }
 
         /// <summary>
         /// 是否删除
         ///</summary>
         [SugarColumn(ColumnName = "quartz_is_deleted")]
-        public string IsDeleted { get; set; }
+        public string? IsDeleted { get; set; }
 
         /// <summary>
         /// 创建时间

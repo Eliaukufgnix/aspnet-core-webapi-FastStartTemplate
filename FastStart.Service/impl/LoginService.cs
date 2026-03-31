@@ -39,8 +39,13 @@ namespace FastStart.Service.impl
         public async Task<TokenVM> Login(LoginBodyDTO loginBodyDTO)
         {
             // 登录前置校验
-            LoginPreCheck(loginBodyDTO.username, loginBodyDTO.password);
+            LoginPreCheck(loginBodyDTO);
+            // 确保密码不为空
+            if (string.IsNullOrEmpty(loginBodyDTO.password))
+                throw new AccountOrPassWordException();
             var sysUser = await sysUserRepository.GetEntityByWhereAsync(x => x.UserName == loginBodyDTO.username) ?? throw new AccountOrPassWordException();
+            if (string.IsNullOrEmpty(sysUser.Password))
+                throw new AccountOrPassWordException();
             if (!EncryptUtils.VerifyPassword(loginBodyDTO.password, sysUser.Password))
                 throw new AccountOrPassWordException();
             var sysUserRole = await sysUserRoleRepository.GetEntityByWhereAsync(x => x.UserId == sysUser.UserId) ?? throw new AccountOrPassWordException();
@@ -58,6 +63,10 @@ namespace FastStart.Service.impl
         {
             try
             {
+                if (string.IsNullOrEmpty(registerBodyDTO.password))
+                {
+                    return false;
+                }
                 return await sysUserRepository.CreateEntityAsync(new SysUser
                 {
                     UserName = registerBodyDTO.username,
@@ -95,8 +104,10 @@ namespace FastStart.Service.impl
         /// <param name="username">用户名</param>
         /// <param name="password">密码</param>
         /// <exception cref="Exception"></exception>
-        private static void LoginPreCheck(string username, string password)
+        private static void LoginPreCheck(LoginBodyDTO loginBodyDTO)
         {
+            var username = loginBodyDTO.username;
+            var password = loginBodyDTO.password;
             // 用户名或密码为空 错误
             if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
             {

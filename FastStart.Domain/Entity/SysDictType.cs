@@ -19,28 +19,28 @@ namespace FastStart.Domain.Entity
         /// 默认值:
         ///</summary>
         [SugarColumn(ColumnName = "dict_name")]
-        public string DictName { get; set; }
+        public string? DictName { get; set; }
 
         /// <summary>
         /// 字典类型
         /// 默认值:
         ///</summary>
         [SugarColumn(ColumnName = "dict_type")]
-        public string DictType { get; set; }
+        public string? DictType { get; set; }
 
         /// <summary>
         /// 状态（0正常 1停用）
         /// 默认值: 0
         ///</summary>
         [SugarColumn(ColumnName = "status")]
-        public string Status { get; set; }
+        public string? Status { get; set; }
 
         /// <summary>
         /// 创建者
         /// 默认值:
         ///</summary>
         [SugarColumn(ColumnName = "create_by")]
-        public string CreateBy { get; set; }
+        public string? CreateBy { get; set; }
 
         /// <summary>
         /// 创建时间
@@ -53,7 +53,7 @@ namespace FastStart.Domain.Entity
         /// 默认值:
         ///</summary>
         [SugarColumn(ColumnName = "update_by")]
-        public string UpdateBy { get; set; }
+        public string? UpdateBy { get; set; }
 
         /// <summary>
         /// 更新时间
@@ -65,6 +65,6 @@ namespace FastStart.Domain.Entity
         /// 备注
         ///</summary>
         [SugarColumn(ColumnName = "remark")]
-        public string Remark { get; set; }
+        public string? Remark { get; set; }
     }
 }

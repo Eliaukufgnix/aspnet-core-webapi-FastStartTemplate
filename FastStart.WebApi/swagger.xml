@@ -9,20 +9,46 @@
             Autofac配置信息
             </summary>
         </member>
+        <member name="M:FastStart.WebApi.Config.AutofacConfig.Load(Autofac.ContainerBuilder)">
+            <summary>
+            Autofac加载
+            </summary>
+            <param name="builder"></param>
+        </member>
         <member name="T:FastStart.WebApi.Config.AutoMapperConfig">
             <summary>
             AutoMapper配置信息
             </summary>
+        </member>
+        <member name="M:FastStart.WebApi.Config.AutoMapperConfig.Configure(AutoMapper.IMapperConfigurationExpression)">
+            <summary>
+            
+            </summary>
+            <param name="cfg"></param>
         </member>
         <member name="T:FastStart.WebApi.Config.JwtBearerConfig">
             <summary>
             JwtBearer配置信息
             </summary>
         </member>
+        <member name="M:FastStart.WebApi.Config.JwtBearerConfig.Configure(Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerOptions)">
+            <summary>
+            
+            </summary>
+            <param name="options"></param>
+        </member>
         <member name="T:FastStart.WebApi.Config.SqlSugarConfig">
             <summary>
             SqlSugar配置
             </summary>
+        </member>
+        <member name="M:FastStart.WebApi.Config.SqlSugarConfig.AddSqlSugarModule(Microsoft.Extensions.Configuration.IConfiguration,System.String)">
+            <summary>
+            添加SqlSugar模块
+            </summary>
+            <param name="configuration"></param>
+            <param name="connName"></param>
+            <returns></returns>
         </member>
         <member name="T:FastStart.WebApi.Config.SwaggerConfig">
             <summary>
@@ -59,10 +85,22 @@
             代码生成
             </summary>
         </member>
+        <member name="M:FastStart.WebApi.Controllers.GenerateCodeController.GenerateCode">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:FastStart.WebApi.Controllers.LoginController">
             <summary>
             用户登录
             </summary>
+        </member>
+        <member name="M:FastStart.WebApi.Controllers.LoginController.#ctor(Microsoft.Extensions.Logging.ILogger{FastStart.WebApi.Controllers.LoginController},FastStart.Service.impl.LoginService)">
+            <summary>
+            
+            </summary>
+            <param name="_logger"></param>
+            <param name="_loginService"></param>
         </member>
         <member name="M:FastStart.WebApi.Controllers.LoginController.Login(FastStart.Domain.Models.LoginBodyDTO)">
             <summary>
@@ -96,6 +134,12 @@
             产品管理
             </summary>
         </member>
+        <member name="M:FastStart.WebApi.Controllers.ProductController.#ctor(FastStart.Service.IProductService)">
+            <summary>
+            
+            </summary>
+            <param name="_productService"></param>
+        </member>
         <member name="M:FastStart.WebApi.Controllers.ProductController.GetProductByType(System.String)">
             <summary>
             通过类型获取产品信息
@@ -107,6 +151,12 @@
             <summary>
             Quartz定时调度
             </summary>
+        </member>
+        <member name="M:FastStart.WebApi.Controllers.QuartzController.#ctor(FastStart.Quartz.ISchedulerCenter)">
+            <summary>
+            
+            </summary>
+            <param name="center"></param>
         </member>
         <member name="M:FastStart.WebApi.Controllers.QuartzController.Start">
             <summary>
@@ -143,6 +193,13 @@
             菜单管理
             </summary>
         </member>
+        <member name="M:FastStart.WebApi.Controllers.SysMenuController.#ctor(FastStart.Service.ISysMenuService,AutoMapper.IMapper)">
+            <summary>
+            
+            </summary>
+            <param name="_sysMenuService"></param>
+            <param name="_mapper"></param>
+        </member>
         <member name="M:FastStart.WebApi.Controllers.SysMenuController.Get">
             <summary>
             获取全部菜单信息
@@ -160,6 +217,26 @@
             通过id获取菜单信息
             </summary>
             <returns></returns>
+        </member>
+        <member name="M:FastStart.WebApi.Controllers.SysMenuController.GetSysMenu">
+            <summary>
+            获取树形菜单信息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FastStart.WebApi.Controllers.SysMenuController.GetMenuTreeByUserId(System.Int64)">
+            <summary>
+            通过用户id获取菜单信息
+            </summary>
+            <param name="UserId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FastStart.WebApi.Controllers.SysMenuController.GetMenuTreeByUserIdTest(System.Int64)">
+             <summary>
+            
+             </summary>
+             <param name="UserId"></param>
+             <returns></returns>
         </member>
         <member name="M:FastStart.WebApi.Controllers.SysMenuController.AddSysMenu(FastStart.Domain.Entity.SysMenu)">
             <summary>
@@ -192,6 +269,13 @@
             角色管理
             </summary>
         </member>
+        <member name="M:FastStart.WebApi.Controllers.SysRoleController.#ctor(FastStart.Service.ISysRoleService,AutoMapper.IMapper)">
+            <summary>
+            
+            </summary>
+            <param name="_sysRoleService"></param>
+            <param name="_mapper"></param>
+        </member>
         <member name="M:FastStart.WebApi.Controllers.SysRoleController.Get">
             <summary>
             获取全部角色信息
@@ -202,6 +286,13 @@
             <summary>
             用户管理
             </summary>
+        </member>
+        <member name="M:FastStart.WebApi.Controllers.SysUserController.#ctor(FastStart.Service.ISysUserService,AutoMapper.IMapper)">
+            <summary>
+            
+            </summary>
+            <param name="_sysUserService"></param>
+            <param name="_mapper"></param>
         </member>
         <member name="M:FastStart.WebApi.Controllers.SysUserController.Get">
             <summary>
@@ -244,7 +335,7 @@
             <summary>
             多选后通过ids进行批量删除
             </summary>
-            <param name="ids">id数组</param>
+            <param name="dto">选择的实体</param>
             <returns></returns>
         </member>
         <member name="M:FastStart.WebApi.Controllers.SysUserController.UpdateSysUser(FastStart.Domain.Entity.SysUser)">
@@ -271,6 +362,29 @@
             </summary>
             <param name="context"></param>
             <returns></returns>
+        </member>
+        <member name="T:FastStart.WebApi.Jobs.SendMailJob">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="M:FastStart.WebApi.Jobs.SendMailJob.Execute(Quartz.IJobExecutionContext)">
+             <summary>
+            
+             </summary>
+             <param name="context"></param>
+             <returns></returns>
+        </member>
+        <member name="T:FastStart.WebApi.Program">
+            <summary>
+            程序主入口
+            </summary>
+        </member>
+        <member name="M:FastStart.WebApi.Program.Main(System.String[])">
+            <summary>
+            程序入口
+            </summary>
+            <param name="args"></param>
         </member>
     </members>
 </doc>

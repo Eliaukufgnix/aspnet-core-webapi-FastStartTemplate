@@ -12,6 +12,10 @@ namespace FastStart.WebApi.Config
     /// </summary>
     public class JwtBearerConfig
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="options"></param>
         public static void Configure(JwtBearerOptions options)
         {
             // token验证相关设置

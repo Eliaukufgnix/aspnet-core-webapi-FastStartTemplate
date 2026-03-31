@@ -158,7 +158,7 @@ namespace FastStart.WebApi
                 app.UseCors("CorsPolicy");
                 app.MapGet("/", (HttpContext context) =>
                 {
-                    context.Response.Headers.Add("Access-Control-Allow-Origin", "*");
+                    context.Response.Headers.Append("Access-Control-Allow-Origin", "*");
                 });
 
                 app.UseHttpsRedirection();

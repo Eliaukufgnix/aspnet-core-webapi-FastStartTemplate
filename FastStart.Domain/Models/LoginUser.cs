@@ -17,7 +17,7 @@ namespace FastStart.Domain.Models
         /// <summary>
         /// 用户唯一标识
         /// </summary>
-        public string token { get; set; }
+        public string? token { get; set; }
 
         /// <summary>
         /// 登录时间
@@ -32,31 +32,31 @@ namespace FastStart.Domain.Models
         /// <summary>
         /// 登录IP地址
         /// </summary>
-        public string ipaddr { get; set; }
+        public string? ipaddr { get; set; }
 
         /// <summary>
         /// 登录地点
         /// </summary>
-        public string loginLocation { get; set; }
+        public string? loginLocation { get; set; }
 
         /// <summary>
         /// 浏览器类型
         /// </summary>
-        public string browser { get; set; }
+        public string? browser { get; set; }
 
         /// <summary>
         /// 操作系统
         /// </summary>
-        public string os { get; set; }
+        public string? os { get; set; }
 
         /// <summary>
         /// 权限列表
         /// </summary>
-        public List<string> permissions { get; set; }
+        public List<string>? permissions { get; set; }
 
         /// <summary>
         /// 用户信息
         /// </summary>
-        public SysUser user { get; set; }
+        public SysUser? user { get; set; }
     }
 }

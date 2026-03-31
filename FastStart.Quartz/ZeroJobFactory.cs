@@ -34,7 +34,7 @@ namespace FastStart.Quartz
                 //从而导致这里的获取Job实例出问题。
                 var serviceScope = _serviceProvider.CreateScope();
                 var job = serviceScope.ServiceProvider.GetService(bundle.JobDetail.JobType) as IJob;
-                return job;
+                return job ?? throw new InvalidOperationException($"无法创建作业实例，类型：{bundle.JobDetail.JobType.FullName}");
             }
             catch (Exception)
             {

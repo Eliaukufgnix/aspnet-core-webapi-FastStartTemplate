@@ -19,35 +19,35 @@ namespace FastStart.Domain.Entity
         /// 默认值:
         ///</summary>
         [SugarColumn(ColumnName = "config_name")]
-        public string ConfigName { get; set; }
+        public string? ConfigName { get; set; }
 
         /// <summary>
         /// 参数键名
         /// 默认值:
         ///</summary>
         [SugarColumn(ColumnName = "config_key")]
-        public string ConfigKey { get; set; }
+        public string? ConfigKey { get; set; }
 
         /// <summary>
         /// 参数键值
         /// 默认值:
         ///</summary>
         [SugarColumn(ColumnName = "config_value")]
-        public string ConfigValue { get; set; }
+        public string? ConfigValue { get; set; }
 
         /// <summary>
         /// 系统内置（Y是 N否）
         /// 默认值: N
         ///</summary>
         [SugarColumn(ColumnName = "config_type")]
-        public string ConfigType { get; set; }
+        public string? ConfigType { get; set; }
 
         /// <summary>
         /// 创建者
         /// 默认值:
         ///</summary>
         [SugarColumn(ColumnName = "create_by")]
-        public string CreateBy { get; set; }
+        public string? CreateBy { get; set; }
 
         /// <summary>
         /// 创建时间
@@ -60,7 +60,7 @@ namespace FastStart.Domain.Entity
         /// 默认值:
         ///</summary>
         [SugarColumn(ColumnName = "update_by")]
-        public string UpdateBy { get; set; }
+        public string? UpdateBy { get; set; }
 
         /// <summary>
         /// 更新时间
@@ -72,6 +72,6 @@ namespace FastStart.Domain.Entity
         /// 备注
         ///</summary>
         [SugarColumn(ColumnName = "remark")]
-        public string Remark { get; set; }
+        public string? Remark { get; set; }
     }
 }

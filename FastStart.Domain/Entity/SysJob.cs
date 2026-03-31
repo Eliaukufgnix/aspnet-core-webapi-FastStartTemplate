@@ -19,55 +19,55 @@ namespace FastStart.Domain.Entity
         /// 默认值:
         ///</summary>
         [SugarColumn(ColumnName = "job_name", IsPrimaryKey = true)]
-        public string JobName { get; set; }
+        public string? JobName { get; set; }
 
         /// <summary>
         /// 任务组名
         /// 默认值: DEFAULT
         ///</summary>
         [SugarColumn(ColumnName = "job_group", IsPrimaryKey = true)]
-        public string JobGroup { get; set; }
+        public string? JobGroup { get; set; }
 
         /// <summary>
         /// 调用目标字符串
         ///</summary>
         [SugarColumn(ColumnName = "invoke_target")]
-        public string InvokeTarget { get; set; }
+        public string? InvokeTarget { get; set; }
 
         /// <summary>
         /// cron执行表达式
         /// 默认值:
         ///</summary>
         [SugarColumn(ColumnName = "cron_expression")]
-        public string CronExpression { get; set; }
+        public string? CronExpression { get; set; }
 
         /// <summary>
         /// 计划执行错误策略（1立即执行 2执行一次 3放弃执行）
         /// 默认值: 3
         ///</summary>
         [SugarColumn(ColumnName = "misfire_policy")]
-        public string MisfirePolicy { get; set; }
+        public string? MisfirePolicy { get; set; }
 
         /// <summary>
         /// 是否并发执行（0允许 1禁止）
         /// 默认值: 1
         ///</summary>
         [SugarColumn(ColumnName = "concurrent")]
-        public string Concurrent { get; set; }
+        public string? Concurrent { get; set; }
 
         /// <summary>
         /// 状态（0正常 1暂停）
         /// 默认值: 0
         ///</summary>
         [SugarColumn(ColumnName = "status")]
-        public string Status { get; set; }
+        public string? Status { get; set; }
 
         /// <summary>
         /// 创建者
         /// 默认值:
         ///</summary>
         [SugarColumn(ColumnName = "create_by")]
-        public string CreateBy { get; set; }
+        public string? CreateBy { get; set; }
 
         /// <summary>
         /// 创建时间
@@ -80,7 +80,7 @@ namespace FastStart.Domain.Entity
         /// 默认值:
         ///</summary>
         [SugarColumn(ColumnName = "update_by")]
-        public string UpdateBy { get; set; }
+        public string? UpdateBy { get; set; }
 
         /// <summary>
         /// 更新时间
@@ -93,6 +93,6 @@ namespace FastStart.Domain.Entity
         /// 默认值:
         ///</summary>
         [SugarColumn(ColumnName = "remark")]
-        public string Remark { get; set; }
+        public string? Remark { get; set; }
     }
 }

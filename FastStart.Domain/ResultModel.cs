@@ -203,9 +203,9 @@ namespace FastStart.Domain
         public const int SUCCESS = StatusCodes.Status200OK;
         public const int FAIL = StatusCodes.Status500InternalServerError;
         public int code { get; set; }
-        public string message { get; set; }
-        public T data { get; set; }
-        public string timestamp { get; set; }
+        public string? message { get; set; }
+        public T? data { get; set; }
+        public string? timestamp { get; set; }
 
         #region 无参构造私有化
 
@@ -278,7 +278,7 @@ namespace FastStart.Domain
 
         #endregion 请求失败
 
-        private static ResultModel<T> Result(int code, string message, T data)
+        private static ResultModel<T> Result(int code, string message, T? data)
         {
             return new ResultModel<T>()
             {

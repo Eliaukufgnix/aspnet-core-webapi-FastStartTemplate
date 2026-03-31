@@ -58,7 +58,7 @@ namespace FastStart.Common.Utils
             var claimsIdentity = new ClaimsIdentity(new[]
             {
                     new Claim("userId", tokenDTO.UserId.ToString()),
-                    new Claim("username", tokenDTO.UserName),
+                    new Claim("username", tokenDTO.UserName ?? string.Empty),
                     new Claim("roleId", tokenDTO.RoleId.ToString())
                 });
             tokenDescriptor.Subject = claimsIdentity;
