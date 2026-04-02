@@ -18,7 +18,7 @@ namespace FastStart.WebApi.Controllers
         private readonly LoginService loginService;
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="_logger"></param>
         /// <param name="_loginService"></param>

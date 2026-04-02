@@ -14,7 +14,7 @@ namespace FastStart.Domain.Entity
         [SugarColumn(ColumnName = "id", IsPrimaryKey = true)]
         public long Id { get; set; }
 
-        /// <summary>   
+        /// <summary>
         /// 货品编号
         /// </summary>
         [SugarColumn(ColumnName = "product_code")]

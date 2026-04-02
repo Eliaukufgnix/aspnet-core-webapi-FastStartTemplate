@@ -18,7 +18,7 @@ namespace FastStart.WebApi.Controllers
         private readonly IMapper mapper;
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="_sysRoleService"></param>
         /// <param name="_mapper"></param>

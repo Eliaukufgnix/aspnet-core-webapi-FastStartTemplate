@@ -21,10 +21,10 @@
             </summary>
         </member>
         <member name="M:FastStart.WebApi.Config.AutoMapperConfig.Configure(AutoMapper.IMapperConfigurationExpression)">
-            <summary>
+             <summary>
             
-            </summary>
-            <param name="cfg"></param>
+             </summary>
+             <param name="cfg"></param>
         </member>
         <member name="T:FastStart.WebApi.Config.JwtBearerConfig">
             <summary>
@@ -32,10 +32,10 @@
             </summary>
         </member>
         <member name="M:FastStart.WebApi.Config.JwtBearerConfig.Configure(Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerOptions)">
-            <summary>
+             <summary>
             
-            </summary>
-            <param name="options"></param>
+             </summary>
+             <param name="options"></param>
         </member>
         <member name="T:FastStart.WebApi.Config.SqlSugarConfig">
             <summary>
@@ -86,9 +86,9 @@
             </summary>
         </member>
         <member name="M:FastStart.WebApi.Controllers.GenerateCodeController.GenerateCode">
-            <summary>
+             <summary>
             
-            </summary>
+             </summary>
         </member>
         <member name="T:FastStart.WebApi.Controllers.LoginController">
             <summary>
@@ -96,11 +96,11 @@
             </summary>
         </member>
         <member name="M:FastStart.WebApi.Controllers.LoginController.#ctor(Microsoft.Extensions.Logging.ILogger{FastStart.WebApi.Controllers.LoginController},FastStart.Service.impl.LoginService)">
-            <summary>
+             <summary>
             
-            </summary>
-            <param name="_logger"></param>
-            <param name="_loginService"></param>
+             </summary>
+             <param name="_logger"></param>
+             <param name="_loginService"></param>
         </member>
         <member name="M:FastStart.WebApi.Controllers.LoginController.Login(FastStart.Domain.Models.LoginBodyDTO)">
             <summary>
@@ -135,10 +135,10 @@
             </summary>
         </member>
         <member name="M:FastStart.WebApi.Controllers.ProductController.#ctor(FastStart.Service.IProductService)">
-            <summary>
+             <summary>
             
-            </summary>
-            <param name="_productService"></param>
+             </summary>
+             <param name="_productService"></param>
         </member>
         <member name="M:FastStart.WebApi.Controllers.ProductController.GetProductByType(System.String)">
             <summary>
@@ -153,10 +153,10 @@
             </summary>
         </member>
         <member name="M:FastStart.WebApi.Controllers.QuartzController.#ctor(FastStart.Quartz.ISchedulerCenter)">
-            <summary>
+             <summary>
             
-            </summary>
-            <param name="center"></param>
+             </summary>
+             <param name="center"></param>
         </member>
         <member name="M:FastStart.WebApi.Controllers.QuartzController.Start">
             <summary>
@@ -194,11 +194,11 @@
             </summary>
         </member>
         <member name="M:FastStart.WebApi.Controllers.SysMenuController.#ctor(FastStart.Service.ISysMenuService,AutoMapper.IMapper)">
-            <summary>
+             <summary>
             
-            </summary>
-            <param name="_sysMenuService"></param>
-            <param name="_mapper"></param>
+             </summary>
+             <param name="_sysMenuService"></param>
+             <param name="_mapper"></param>
         </member>
         <member name="M:FastStart.WebApi.Controllers.SysMenuController.Get">
             <summary>
@@ -270,11 +270,11 @@
             </summary>
         </member>
         <member name="M:FastStart.WebApi.Controllers.SysRoleController.#ctor(FastStart.Service.IBaseService{FastStart.Domain.Entity.SysRole},AutoMapper.IMapper)">
-            <summary>
+             <summary>
             
-            </summary>
-            <param name="_sysRoleService"></param>
-            <param name="_mapper"></param>
+             </summary>
+             <param name="_sysRoleService"></param>
+             <param name="_mapper"></param>
         </member>
         <member name="M:FastStart.WebApi.Controllers.SysRoleController.Get">
             <summary>
@@ -288,11 +288,11 @@
             </summary>
         </member>
         <member name="M:FastStart.WebApi.Controllers.SysUserController.#ctor(FastStart.Service.IBaseService{FastStart.Domain.Entity.SysUser},AutoMapper.IMapper)">
-            <summary>
+             <summary>
             
-            </summary>
-            <param name="_sysUserService"></param>
-            <param name="_mapper"></param>
+             </summary>
+             <param name="_sysUserService"></param>
+             <param name="_mapper"></param>
         </member>
         <member name="M:FastStart.WebApi.Controllers.SysUserController.Get">
             <summary>

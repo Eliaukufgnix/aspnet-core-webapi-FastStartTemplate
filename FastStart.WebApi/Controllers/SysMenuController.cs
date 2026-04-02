@@ -19,7 +19,7 @@ namespace FastStart.WebApi.Controllers
         private readonly IMapper mapper;
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="_sysMenuService"></param>
         /// <param name="_mapper"></param>

@@ -153,7 +153,7 @@ namespace FastStart.Quartz
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="assemblyName"></param>
         /// <param name="className"></param>
@@ -171,6 +171,7 @@ namespace FastStart.Quartz
                 return null;
             }
         }
+
         /// <summary>
         /// 暂停一个指定的计划任务
         /// </summary>
@@ -239,6 +240,6 @@ namespace FastStart.Quartz
                 .Build();
         }
 
-        #endregion
+        #endregion 创建触发器帮助方法
     }
 }

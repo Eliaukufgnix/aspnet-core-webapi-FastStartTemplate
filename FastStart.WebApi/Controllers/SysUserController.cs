@@ -21,7 +21,7 @@ namespace FastStart.WebApi.Controllers
         private readonly IMapper mapper;
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="_sysUserService"></param>
         /// <param name="_mapper"></param>
@@ -85,7 +85,7 @@ namespace FastStart.WebApi.Controllers
 
             if (!string.IsNullOrEmpty(queryParameters.UserName))
             {
-                expressionable.And(x =>x.UserName != null && x.UserName.Contains(queryParameters.UserName));
+                expressionable.And(x => x.UserName != null && x.UserName.Contains(queryParameters.UserName));
             }
             if (!string.IsNullOrEmpty(queryParameters.NickName))
             {

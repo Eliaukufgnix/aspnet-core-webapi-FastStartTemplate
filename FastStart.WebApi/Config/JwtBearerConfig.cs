@@ -13,7 +13,7 @@ namespace FastStart.WebApi.Config
     public class JwtBearerConfig
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="options"></param>
         public static void Configure(JwtBearerOptions options)

@@ -10,7 +10,7 @@ namespace FastStart.Service.impl
 
         public ProductService(IBaseRepository<Product> _baseRepository) : base(_baseRepository)
         {
-            productRepository  = _baseRepository;
+            productRepository = _baseRepository;
         }
 
         public Task<List<Product>> GetProductByType(string type)

@@ -17,7 +17,7 @@ namespace FastStart.WebApi.Controllers
         private readonly IProductService productService;
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="_productService"></param>
         public ProductController(IProductService _productService)

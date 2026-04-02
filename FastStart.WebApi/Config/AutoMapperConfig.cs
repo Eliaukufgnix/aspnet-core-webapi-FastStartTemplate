@@ -10,7 +10,7 @@ namespace FastStart.WebApi.Config
     public class AutoMapperConfig
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="cfg"></param>
         public static void Configure(IMapperConfigurationExpression cfg)

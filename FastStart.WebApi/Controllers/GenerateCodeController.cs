@@ -10,7 +10,7 @@ namespace FastStart.WebApi.Controllers
     public class GenerateCodeController : ControllerBase
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public void GenerateCode()
         {
