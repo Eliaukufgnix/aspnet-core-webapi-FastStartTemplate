@@ -1,7 +1,7 @@
 ﻿using FastStart.Domain.Constant;
 using Microsoft.AspNetCore.Http;
 
-namespace FastStart.Common.Exception
+namespace FastStart.Common.Exceptions
 {
     public class AccountOrPassWordException : BaseException
     {

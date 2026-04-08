@@ -1,4 +1,4 @@
-﻿using FastStart.Common.Exception;
+﻿using FastStart.Common.Exceptions;
 using FastStart.Common.Utils;
 using FastStart.Domain.Constant;
 using FastStart.Domain.Entity;

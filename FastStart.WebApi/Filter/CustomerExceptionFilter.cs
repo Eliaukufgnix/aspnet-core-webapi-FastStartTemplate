@@ -1,4 +1,5 @@
-﻿using FastStart.Domain;
+﻿using FastStart.Common.Exceptions;
+using FastStart.Domain;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Newtonsoft.Json;
@@ -19,33 +20,28 @@ namespace FastStart.WebApi.Filter
         /// <returns></returns>
         void IExceptionFilter.OnException(ExceptionContext context)
         {
-            // 如果异常没有被处理则进行处理
-            if (context.ExceptionHandled == false)
+            // 使用 Serilog 的 Error 方法重载，传入整个异常对象（会自动递归输出 InnerException）
+            Log.Error(context.Exception,
+                "全局异常捕获 | 路径: {Path} | 方法: {Method}",
+                context.HttpContext.Request.Path,
+                context.HttpContext.Request.Method);
+
+            // 可选：同时输出到控制台，便于调试
+            Console.WriteLine(context.Exception.ToString());
+
+            int code = context.Exception is BaseException baseException ? baseException.Code : 0;
+            ResultModel<List<object>> result = code == 0
+                ? ResultModel<List<object>>.Fail(context.Exception.Message)
+                : ResultModel<List<object>>.Fail(code, context.Exception.Message);
+
+            context.Result = new ContentResult
             {
-                // 记录异常信息和堆栈跟踪
-                StringBuilder exMsg = new();
-                exMsg.AppendLine();
-                exMsg.AppendLine($"【异常方法:】{context.HttpContext.Request.Path}");
-                exMsg.AppendLine($"【请求类型:】{context.HttpContext.Request.Method}");
-                exMsg.AppendLine($"【异常错误:】{context.Exception.Message}");
-                exMsg.AppendLine($"【堆栈跟踪:】{context.Exception.StackTrace}");
-                Log.Error(exMsg.ToString());
-                // 定义返回类型
-                int code = context.Exception is FastStart.Common.Exception.BaseException baseException ? baseException.Code : default;
-                ResultModel<List<object>> result = code == 0 ? ResultModel<List<object>>.Fail(context.Exception.Message) : ResultModel<List<object>>.Fail(code, context.Exception.Message);
-                context.Result = new ContentResult
-                {
-                    // 返回状态码设置为200，表示成功
-                    StatusCode = StatusCodes.Status200OK,
-                    // 设置返回格式
-                    ContentType = "application/json;charset=utf-8",
-                    Content = JsonConvert.SerializeObject(result)
-                };
-            }
-            // 设置为true，表示异常已经被处理了
+                StatusCode = StatusCodes.Status200OK,
+                ContentType = "application/json;charset=utf-8",
+                Content = JsonConvert.SerializeObject(result)
+            };
+
             context.ExceptionHandled = true;
-            // 关闭并刷新 Serilog
-            Log.CloseAndFlush();
         }
     }
 }

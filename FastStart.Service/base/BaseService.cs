@@ -1,4 +1,5 @@
 ﻿using FastStart.Repository;
+using SqlSugar;
 using System.Data;
 using System.Linq.Expressions;
 
@@ -22,7 +23,7 @@ namespace FastStart.Service
             return baseRepository.CreateEntityAsync(entity);
         }
 
-        public Task<int> CreateEntitysAsync(List<T> entitys)
+        public Task<int> CreateEntitiesAsync(List<T> entitys)
         {
             return baseRepository.CreateEntitysAsync(entitys);
         }
@@ -32,7 +33,7 @@ namespace FastStart.Service
             return baseRepository.DeleteEntityByIdAsync(id);
         }
 
-        public Task<int> DeleteEntitysByWhereAsync(Expression<Func<T, bool>> expression)
+        public Task<int> DeleteEntitiesByWhereAsync(Expression<Func<T, bool>> expression)
         {
             return baseRepository.DeleteEntitysByWhereAsync(expression);
         }
@@ -42,7 +43,7 @@ namespace FastStart.Service
             return baseRepository.GetEntityByIdAsync(id);
         }
 
-        public Task<List<T>> GetEntitysAsync()
+        public Task<List<T>> GetEntitiesAsync()
         {
             return baseRepository.GetEntitysAsync();
         }
@@ -52,19 +53,24 @@ namespace FastStart.Service
             return baseRepository.GetEntityByWhereAsync(expression);
         }
 
-        public Task<List<T>> GetEntitysByWhereAsync(Expression<Func<T, bool>> expression)
+        public Task<List<T>> GetEntitiesByWhereAsync(Expression<Func<T, bool>> expression)
         {
             return baseRepository.GetEntitysByWhereAsync(expression);
         }
 
-        public List<T> GetEntitysToPage(int pageIndex, int pageSize, ref int totalCount)
+        public List<T> GetEntitiesToPage(int pageIndex, int pageSize, ref int totalCount)
         {
             return baseRepository.GetEntitysToPage(pageIndex, pageSize, ref totalCount);
         }
 
-        public List<T> GetEntitysByWhereToPage(Expression<Func<T, bool>> expression, int pageIndex, int pageSize, ref int totalCount)
+        public List<T> GetEntitiesByWhereToPage(Expression<Func<T, bool>> expression, int pageIndex, int pageSize, ref int totalCount)
         {
-            return baseRepository.GetEntitysByWhereToPage(expression, pageIndex, pageSize, ref totalCount);
+            return baseRepository.GetEntitiesByWhereToPage(expression, pageIndex, pageSize, ref totalCount);
+        }
+
+        public async Task<List<T>> GetEntitiesByWhereToPageAsync(Expression<Func<T, bool>> expression, int pageIndex, int pageSize, RefAsync<int> totalCount)
+        {
+            return await baseRepository.GetEntitiesByWhereToPageAsync(expression, pageIndex, pageSize, totalCount);
         }
 
         public Task<bool> UpdateEntityAsync(T entity)
@@ -72,12 +78,12 @@ namespace FastStart.Service
             return baseRepository.UpdateEntityAsync(entity);
         }
 
-        public Task<int> UpdateEntitysAsync(List<T> entitys)
+        public Task<int> UpdateEntitiesAsync(List<T> entitys)
         {
             return baseRepository.UpdateEntitysAsync(entitys);
         }
 
-        public Task<List<T>> GetEntitysBySqlListAsync(string sql)
+        public Task<List<T>> GetEntitiesBySqlListAsync(string sql)
         {
             return baseRepository.GetEntitysBySqlListAsync(sql);
         }

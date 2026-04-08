@@ -1,4 +1,4 @@
-﻿namespace FastStart.Common.Exception
+﻿namespace FastStart.Common.Exceptions
 {
     [Serializable]
     public class BaseException : System.Exception

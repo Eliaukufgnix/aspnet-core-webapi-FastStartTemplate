@@ -188,6 +188,68 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="T:FastStart.WebApi.Controllers.SysConfigController">
+            <summary>
+            参数管理
+            </summary>
+        </member>
+        <member name="M:FastStart.WebApi.Controllers.SysConfigController.#ctor(FastStart.Service.IBaseService{FastStart.Domain.Entity.SysConfig},AutoMapper.IMapper)">
+             <summary>
+            
+             </summary>
+             <param name="_SysConfigService"></param>
+             <param name="_mapper"></param>
+        </member>
+        <member name="M:FastStart.WebApi.Controllers.SysConfigController.GetEntitiesByWhereToPageAsync(FastStart.Domain.Models.SysConfigDTO)">
+            <summary>
+            分页查询
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FastStart.WebApi.Controllers.SysConfigController.SaveEntity(FastStart.Domain.Entity.SysConfig)">
+            <summary>
+            保存数据（新增/修改）
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FastStart.WebApi.Controllers.SysConfigController.DeleteEntitiesAsync(FastStart.Domain.Models.IdsDTO)">
+            <summary>
+            多选后通过ids进行批量删除
+            </summary>
+            <param name="dto">选择的实体</param>
+            <returns></returns>
+        </member>
+        <member name="T:FastStart.WebApi.Controllers.SysDeptController">
+            <summary>
+            部门管理
+            </summary>
+        </member>
+        <member name="M:FastStart.WebApi.Controllers.SysDeptController.#ctor(FastStart.Service.IBaseService{FastStart.Domain.Entity.SysDept},AutoMapper.IMapper)">
+             <summary>
+            
+             </summary>
+             <param name="_SysDeptService"></param>
+             <param name="_mapper"></param>
+        </member>
+        <member name="M:FastStart.WebApi.Controllers.SysDeptController.GetEntitiesByWhereToPageAsync(FastStart.Domain.Models.SysDeptDTO)">
+            <summary>
+            分页查询
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FastStart.WebApi.Controllers.SysDeptController.SaveEntity(FastStart.Domain.Entity.SysDept)">
+            <summary>
+            保存数据（新增/修改）
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FastStart.WebApi.Controllers.SysDeptController.DeleteEntitiesAsync(FastStart.Domain.Models.IdsDTO)">
+            <summary>
+            多选后通过ids进行批量删除
+            </summary>
+            <param name="dto">选择的实体</param>
+            <returns></returns>
+        </member>
         <member name="T:FastStart.WebApi.Controllers.SysMenuController">
             <summary>
             菜单管理
@@ -200,22 +262,23 @@
              <param name="_sysMenuService"></param>
              <param name="_mapper"></param>
         </member>
-        <member name="M:FastStart.WebApi.Controllers.SysMenuController.Get">
+        <member name="M:FastStart.WebApi.Controllers.SysMenuController.GetEntitiesByWhereToPageAsync(FastStart.Domain.Models.SysMenuDTO)">
             <summary>
-            获取全部菜单信息
+            分页查询
             </summary>
             <returns></returns>
         </member>
-        <member name="M:FastStart.WebApi.Controllers.SysMenuController.GetSysMenuToPage(System.Int32,System.Int32)">
+        <member name="M:FastStart.WebApi.Controllers.SysMenuController.SaveEntity(FastStart.Domain.Entity.SysMenu)">
             <summary>
-            分页获取菜单信息
+            保存数据（新增/修改）
             </summary>
             <returns></returns>
         </member>
-        <member name="M:FastStart.WebApi.Controllers.SysMenuController.GetSysMenuById(System.Int32)">
+        <member name="M:FastStart.WebApi.Controllers.SysMenuController.DeleteEntitiesAsync(FastStart.Domain.Models.IdsDTO)">
             <summary>
-            通过id获取菜单信息
+            多选后通过ids进行批量删除
             </summary>
+            <param name="dto">选择的实体</param>
             <returns></returns>
         </member>
         <member name="M:FastStart.WebApi.Controllers.SysMenuController.GetSysMenu">
@@ -224,6 +287,14 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:FastStart.WebApi.Controllers.SysMenuController.GetChildren(System.Collections.Generic.List{FastStart.Domain.Entity.SysMenu},System.Int64)">
+             <summary>
+            
+             </summary>
+             <param name="allSysMenus"></param>
+             <param name="parentId"></param>
+             <returns></returns>
+        </member>
         <member name="M:FastStart.WebApi.Controllers.SysMenuController.GetMenuTreeByUserId(System.Int64)">
             <summary>
             通过用户id获取菜单信息
@@ -231,37 +302,35 @@
             <param name="UserId"></param>
             <returns></returns>
         </member>
-        <member name="M:FastStart.WebApi.Controllers.SysMenuController.GetMenuTreeByUserIdTest(System.Int64)">
+        <member name="T:FastStart.WebApi.Controllers.SysPostController">
+            <summary>
+            岗位管理
+            </summary>
+        </member>
+        <member name="M:FastStart.WebApi.Controllers.SysPostController.#ctor(FastStart.Service.IBaseService{FastStart.Domain.Entity.SysPost},AutoMapper.IMapper)">
              <summary>
             
              </summary>
-             <param name="UserId"></param>
-             <returns></returns>
+             <param name="_SysPostService"></param>
+             <param name="_mapper"></param>
         </member>
-        <member name="M:FastStart.WebApi.Controllers.SysMenuController.AddSysMenu(FastStart.Domain.Entity.SysMenu)">
+        <member name="M:FastStart.WebApi.Controllers.SysPostController.GetEntitiesByWhereToPageAsync(FastStart.Domain.Models.SysPostDTO)">
             <summary>
-            添加菜单信息
+            分页查询
             </summary>
             <returns></returns>
         </member>
-        <member name="M:FastStart.WebApi.Controllers.SysMenuController.DeleteSysMenu(System.Int32)">
+        <member name="M:FastStart.WebApi.Controllers.SysPostController.SaveEntity(FastStart.Domain.Entity.SysPost)">
             <summary>
-            通过id删除单个菜单信息
+            保存数据（新增/修改）
             </summary>
             <returns></returns>
         </member>
-        <member name="M:FastStart.WebApi.Controllers.SysMenuController.DeleteSysMenuList(System.Object[])">
+        <member name="M:FastStart.WebApi.Controllers.SysPostController.DeleteEntitiesAsync(FastStart.Domain.Models.IdsDTO)">
             <summary>
             多选后通过ids进行批量删除
             </summary>
-            <param name="ids">id数组</param>
-            <returns></returns>
-        </member>
-        <member name="M:FastStart.WebApi.Controllers.SysMenuController.UpdateSysMenu(FastStart.Domain.Entity.SysMenu)">
-            <summary>
-            更新菜单信息
-            </summary>
-            <param name="sysMenu">更新后的新实体信息</param>
+            <param name="dto">选择的实体</param>
             <returns></returns>
         </member>
         <member name="T:FastStart.WebApi.Controllers.SysRoleController">
@@ -276,10 +345,23 @@
              <param name="_sysRoleService"></param>
              <param name="_mapper"></param>
         </member>
-        <member name="M:FastStart.WebApi.Controllers.SysRoleController.Get">
+        <member name="M:FastStart.WebApi.Controllers.SysRoleController.GetEntitiesByWhereToPageAsync(FastStart.Domain.Models.DTO.SysRoleDTO)">
             <summary>
-            获取全部角色信息
+            分页查询
             </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FastStart.WebApi.Controllers.SysRoleController.SaveEntity(FastStart.Domain.Entity.SysRole)">
+            <summary>
+            保存数据（新增/修改）
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FastStart.WebApi.Controllers.SysRoleController.DeleteEntitiesAsync(FastStart.Domain.Models.IdsDTO)">
+            <summary>
+            多选后通过ids进行批量删除
+            </summary>
+            <param name="dto">选择的实体</param>
             <returns></returns>
         </member>
         <member name="T:FastStart.WebApi.Controllers.SysUserController">
@@ -294,61 +376,23 @@
              <param name="_sysUserService"></param>
              <param name="_mapper"></param>
         </member>
-        <member name="M:FastStart.WebApi.Controllers.SysUserController.Get">
+        <member name="M:FastStart.WebApi.Controllers.SysUserController.GetEntitiesByWhereToPageAsync(FastStart.Domain.Models.SysUserDTO)">
             <summary>
-            获取全部用户信息
+            分页查询
             </summary>
             <returns></returns>
         </member>
-        <member name="M:FastStart.WebApi.Controllers.SysUserController.GetSysUserByWhereToPage(FastStart.Domain.Models.SysUserDTO)">
+        <member name="M:FastStart.WebApi.Controllers.SysUserController.SaveEntity(FastStart.Domain.Entity.SysUser)">
             <summary>
-            带条件分页查询获取用户信息
+            保存数据（新增/修改）
             </summary>
             <returns></returns>
         </member>
-        <member name="M:FastStart.WebApi.Controllers.SysUserController.BuildQueryExpression(FastStart.Domain.Models.SysUserDTO)">
-            <summary>
-            构建查询表达式
-            </summary>
-            <param name="queryParameters"></param>
-            <returns></returns>
-        </member>
-        <member name="M:FastStart.WebApi.Controllers.SysUserController.GetSysUserById(System.String)">
-            <summary>
-            通过id获取用户信息
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:FastStart.WebApi.Controllers.SysUserController.AddSysUser(FastStart.Domain.Entity.SysUser)">
-            <summary>
-            添加用户信息
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:FastStart.WebApi.Controllers.SysUserController.DeleteSysUser(System.Object)">
-            <summary>
-            通过id删除单个用户信息
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:FastStart.WebApi.Controllers.SysUserController.DeleteSysUserList(FastStart.Domain.Models.IdsDTO)">
+        <member name="M:FastStart.WebApi.Controllers.SysUserController.DeleteEntitiesAsync(FastStart.Domain.Models.IdsDTO)">
             <summary>
             多选后通过ids进行批量删除
             </summary>
             <param name="dto">选择的实体</param>
-            <returns></returns>
-        </member>
-        <member name="M:FastStart.WebApi.Controllers.SysUserController.UpdateSysUser(FastStart.Domain.Entity.SysUser)">
-            <summary>
-            更新用户信息
-            </summary>
-            <param name="sysUser">更新后的新实体信息</param>
-            <returns></returns>
-        </member>
-        <member name="M:FastStart.WebApi.Controllers.SysUserController.SaveSysUser(FastStart.Domain.Entity.SysUser)">
-            <summary>
-            保存用户信息
-            </summary>
             <returns></returns>
         </member>
         <member name="T:FastStart.WebApi.Filter.GlobalCustomerExceptionFilter">

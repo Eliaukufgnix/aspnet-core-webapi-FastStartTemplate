@@ -44,14 +44,14 @@ namespace FastStart.Domain.Entity
         /// 默认值: 1
         ///</summary>
         [SugarColumn(ColumnName = "menu_check_strictly")]
-        public byte? MenuCheckStrictly { get; set; }
+        public int? MenuCheckStrictly { get; set; }
 
         /// <summary>
         /// 部门树选择项是否关联显示
         /// 默认值: 1
         ///</summary>
         [SugarColumn(ColumnName = "dept_check_strictly")]
-        public byte? DeptCheckStrictly { get; set; }
+        public int? DeptCheckStrictly { get; set; }
 
         /// <summary>
         /// 角色状态（0正常 1停用）

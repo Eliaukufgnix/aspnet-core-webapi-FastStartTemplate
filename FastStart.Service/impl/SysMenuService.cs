@@ -20,7 +20,7 @@ namespace FastStart.Service.impl
             return sysMenuVOs;
         }
 
-        private static List<SysMenuVO> GetChildren(List<SysMenuDTO> sysMenuDTOs, long ParentId, int level)
+        private static List<SysMenuVO> GetChildren(List<SysMenuDTO> sysMenuDTOs, long? ParentId, int level)
         {
             return sysMenuDTOs
                 .Where(x => x.ParentId == ParentId) // 筛选出子菜单
@@ -35,7 +35,7 @@ namespace FastStart.Service.impl
                         icon = childMenu.Icon,
                         title = childMenu.MenuName
                     },
-                    children = GetChildren(sysMenuDTOs, childMenu.MenuId, level + 1) // 递归获取子菜单的子菜单
+                    children = GetChildren(sysMenuDTOs, childMenu?.MenuId, level + 1) // 递归获取子菜单的子菜单
                 }).ToList();
         }
 

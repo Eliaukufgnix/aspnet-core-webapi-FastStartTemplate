@@ -10,6 +10,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Autofac" Version="9.1.0" />
+    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="11.0.0" />
     <PackageReference Include="AutoMapper" Version="16.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.30" />
     <PackageReference Include="Quartz.AspNetCore" Version="3.9.0" />

@@ -1,5 +1,8 @@
 ﻿using Autofac;
+using FastStart.Domain.Entity;
 using FastStart.Quartz;
+using FastStart.Repository;
+using FastStart.Service;
 using FastStart.Service.impl;
 using Quartz.Spi;
 using SqlSugar;
@@ -33,6 +36,12 @@ namespace FastStart.WebApi.Config
             builder.RegisterAssemblyTypes(repository, service).AsImplementedInterfaces();
             // 注入SysLoginService
             builder.RegisterType<LoginService>().AsSelf().InstancePerLifetimeScope();
+            builder.RegisterGeneric(typeof(BaseService<>)).As(typeof(IBaseService<>)).SingleInstance();
+            // 注册泛型仓储
+            builder.RegisterGeneric(typeof(BaseRepository<>))
+                   .As(typeof(IBaseRepository<>))
+                   .InstancePerLifetimeScope();
+
             // 注入ISqlSugarClient
             builder.Register(c =>
             {

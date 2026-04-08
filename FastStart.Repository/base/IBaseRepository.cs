@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using SqlSugar;
+using System.Data;
 using System.Linq.Expressions;
 
 namespace FastStart.Repository
@@ -99,7 +100,17 @@ namespace FastStart.Repository
         /// <param name="pageSize">每页条数</param>
         /// <param name="totalCount">总记录数</param>
         /// <returns>查询到的实体集合</returns>
-        List<T> GetEntitysByWhereToPage(Expression<Func<T, bool>> expression, int pageIndex, int pageSize, ref int totalCount);
+        List<T> GetEntitiesByWhereToPage(Expression<Func<T, bool>> expression, int pageIndex, int pageSize, ref int totalCount);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="expression"></param>
+        /// <param name="pageIndex"></param>
+        /// <param name="pageSize"></param>
+        /// <param name="totalCount"></param>
+        /// <returns></returns>
+        Task<List<T>> GetEntitiesByWhereToPageAsync(Expression<Func<T, bool>> expression, int pageIndex, int pageSize, RefAsync<int> totalCount);
 
         /// <summary>
         /// 原生SQL语句查询-List

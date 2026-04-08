@@ -38,7 +38,7 @@ namespace FastStart.Common.Utils
         /// <returns>双token</returns>
         public static (string accessToken, string refreshToken) GenerateToken(TokenDTO tokenDTO)
         {
-            string accessToken = GenerateToken(tokenDTO, DateTime.Now.AddSeconds(120), AccessTokenSecret);
+            string accessToken = GenerateToken(tokenDTO, DateTime.Now.AddDays(120), AccessTokenSecret);
             string refreshToken = GenerateToken(tokenDTO, DateTime.Now.AddDays(7), RefreshTokenSecret);
             return (accessToken, refreshToken);
         }

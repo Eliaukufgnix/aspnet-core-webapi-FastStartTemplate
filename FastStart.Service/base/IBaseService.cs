@@ -1,4 +1,6 @@
-﻿using System.Data;
+﻿using FastStart.Repository;
+using SqlSugar;
+using System.Data;
 using System.Linq.Expressions;
 
 namespace FastStart.Service
@@ -17,7 +19,7 @@ namespace FastStart.Service
         /// </summary>
         /// <param name="entities">要新增的实体对象集合</param>
         /// <returns>新增操作影响的记录条数</returns>
-        Task<int> CreateEntitysAsync(List<T> entitys);
+        Task<int> CreateEntitiesAsync(List<T> entitys);
 
         /// <summary>
         /// 1条修改
@@ -32,7 +34,7 @@ namespace FastStart.Service
         /// <param name="entities">要修改的实体对象集合</param>
         /// <returns>受影响的记录数</returns>
 
-        Task<int> UpdateEntitysAsync(List<T> entitys);
+        Task<int> UpdateEntitiesAsync(List<T> entitys);
 
         /// <summary>
         /// 1条删除
@@ -46,13 +48,13 @@ namespace FastStart.Service
         /// </summary>
         /// <param name="expression">条件</param>
         /// <returns>返回受影响条数</returns>
-        Task<int> DeleteEntitysByWhereAsync(Expression<Func<T, bool>> expression);
+        Task<int> DeleteEntitiesByWhereAsync(Expression<Func<T, bool>> expression);
 
         /// <summary>
         /// 查询所有
         /// </summary>
         /// <returns>返回实体集合</returns>
-        Task<List<T>> GetEntitysAsync();
+        Task<List<T>> GetEntitiesAsync();
 
         /// <summary>
         /// 根据ID单条查询
@@ -73,7 +75,7 @@ namespace FastStart.Service
         /// </summary>
         /// <param name="expression">条件表达式</param>
         /// <returns>符合条件的实体集合</returns>
-        Task<List<T>> GetEntitysByWhereAsync(Expression<Func<T, bool>> expression);
+        Task<List<T>> GetEntitiesByWhereAsync(Expression<Func<T, bool>> expression);
 
         /// <summary>
         /// 分页查询
@@ -82,7 +84,7 @@ namespace FastStart.Service
         /// <param name="pageSize">每页条数</param>
         /// <param name="totalCount">总记录数</param>
         /// <returns>查询到的实体集合</returns>
-        List<T> GetEntitysToPage(int pageIndex, int pageSize, ref int totalCount);
+        List<T> GetEntitiesToPage(int pageIndex, int pageSize, ref int totalCount);
 
         /// <summary>
         /// 带条件的分页查询
@@ -92,14 +94,24 @@ namespace FastStart.Service
         /// <param name="pageSize">每页条数</param>
         /// <param name="totalCount">总记录数</param>
         /// <returns>查询到的实体集合</returns>
-        List<T> GetEntitysByWhereToPage(Expression<Func<T, bool>> expression, int pageIndex, int pageSize, ref int totalCount);
+        List<T> GetEntitiesByWhereToPage(Expression<Func<T, bool>> expression, int pageIndex, int pageSize, ref int totalCount);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="expression"></param>
+        /// <param name="pageIndex"></param>
+        /// <param name="pageSize"></param>
+        /// <param name="totalCount"></param>
+        /// <returns></returns>
+        Task<List<T>> GetEntitiesByWhereToPageAsync(Expression<Func<T, bool>> expression, int pageIndex, int pageSize, RefAsync<int> totalCount);
 
         /// <summary>
         /// 原生SQL语句查询-List
         /// </summary>
         /// <param name="sql">SQL</param>
         /// <returns>查询到的实体集合</returns>
-        Task<List<T>> GetEntitysBySqlListAsync(string sql);
+        Task<List<T>> GetEntitiesBySqlListAsync(string sql);
 
         /// <summary>
         /// 原生SQL查询-DataTable

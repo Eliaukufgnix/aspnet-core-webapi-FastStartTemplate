@@ -1,8 +1,8 @@
 ﻿namespace FastStart.Domain.Models
 {
-    public class SysMenuDTO
+    public class SysMenuDTO : BasePageDTO
     {
-        public long MenuId { get; set; }
+        public long? MenuId { get; set; }
         public long? ParentId { get; set; }
         public string? MenuName { get; set; }
         public string? Path { get; set; }

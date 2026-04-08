@@ -1,5 +1,6 @@
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
+using FastStart.Common.Utils;
 using FastStart.WebApi.Config;
 using FastStart.WebApi.Filter;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -86,6 +87,9 @@ namespace FastStart.WebApi
                 {
                     // 自定义一个一场拦截器，使响应结果能返回为指定格式。但该拦截器只能拦截控制器中的异常。
                     options.Filters.Add<GlobalCustomerExceptionFilter>();
+                }).AddJsonOptions(configure =>
+                {
+                    configure.JsonSerializerOptions.Converters.Add(new DatetimeJsonConverter());
                 });
                 // 全局验权，要求每个控制器下的方法都要进行token验证，如果想关闭，方法上添加 [AllowAnonymous] 即可。
                 builder.Services.AddRazorPages().AddMvcOptions(option =>

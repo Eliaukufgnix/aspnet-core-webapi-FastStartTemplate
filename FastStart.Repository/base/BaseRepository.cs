@@ -133,11 +133,23 @@ namespace FastStart.Repository
             }
         }
 
-        public virtual List<T> GetEntitysByWhereToPage(Expression<Func<T, bool>> expression, int pageIndex, int pageSize, ref int totalCount)
+        public virtual List<T> GetEntitiesByWhereToPage(Expression<Func<T, bool>> expression, int pageIndex, int pageSize, ref int totalCount)
         {
             try
             {
                 return db.Queryable<T>().Where(expression).ToPageList(pageIndex, pageSize, ref totalCount);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public virtual async Task<List<T>> GetEntitiesByWhereToPageAsync(Expression<Func<T, bool>> expression, int pageIndex, int pageSize, RefAsync<int> totalCount)
+        {
+            try
+            {
+                return await db.Queryable<T>().Where(expression).ToPageListAsync(pageIndex, pageSize, totalCount);
             }
             catch (Exception)
             {

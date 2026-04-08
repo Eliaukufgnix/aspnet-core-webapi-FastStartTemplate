@@ -3,31 +3,30 @@ using FastStart.Common.Utils;
 using FastStart.Domain;
 using FastStart.Domain.Entity;
 using FastStart.Domain.Models;
-using FastStart.Domain.Models.DTO;
 using FastStart.Service;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FastStart.WebApi.Controllers
 {
     /// <summary>
-    /// 角色管理
+    /// 岗位管理
     /// </summary>
     [Route("dev-api/[controller]")]
     [ApiController]
-    [ApiExplorerSettings(GroupName = "SysRole")]
-    public class SysRoleController : ControllerBase
+    [ApiExplorerSettings(GroupName = "SysPost")]
+    public class SysPostController : ControllerBase
     {
-        private readonly IBaseService<SysRole> sysRoleService;
+        private readonly IBaseService<SysPost> SysPostService;
         private readonly IMapper mapper;
 
         /// <summary>
         ///
         /// </summary>
-        /// <param name="_sysRoleService"></param>
+        /// <param name="_SysPostService"></param>
         /// <param name="_mapper"></param>
-        public SysRoleController(IBaseService<SysRole> _sysRoleService, IMapper _mapper)
+        public SysPostController(IBaseService<SysPost> _SysPostService, IMapper _mapper)
         {
-            sysRoleService = _sysRoleService;
+            SysPostService = _SysPostService;
             mapper = _mapper;
         }
 
@@ -37,17 +36,17 @@ namespace FastStart.WebApi.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("GetEntitiesByWhereToPageAsync")]
-        public async Task<ResultModel<SelectByPageVO<SysRole>>> GetEntitiesByWhereToPageAsync([FromQuery] SysRoleDTO queryParameters)
+        public async Task<ResultModel<SelectByPageVO<SysPost>>> GetEntitiesByWhereToPageAsync([FromQuery] SysPostDTO queryParameters)
         {
-            var where = QueryExpressionBuilder.BuildExpression<SysRole>(queryParameters);
+            var where = QueryExpressionBuilder.BuildExpression<SysPost>(queryParameters);
             var totalCount = 0;
-            var data = await sysRoleService.GetEntitiesByWhereToPageAsync(
+            var data = await SysPostService.GetEntitiesByWhereToPageAsync(
                 where,
                 queryParameters.pageIndex,
                 queryParameters.pageSize,
                 totalCount
             );
-            return ResultModel<SelectByPageVO<SysRole>>.Success(new SelectByPageVO<SysRole>(data, totalCount));
+            return ResultModel<SelectByPageVO<SysPost>>.Success(new SelectByPageVO<SysPost>(data, totalCount));
         }
 
         /// <summary>
@@ -56,13 +55,13 @@ namespace FastStart.WebApi.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route("SaveEntity")]
-        public async Task<ResultModel<bool>> SaveEntity([FromBody] SysRole sysRole)
+        public async Task<ResultModel<bool>> SaveEntity([FromBody] SysPost sysPost)
         {
-            if (sysRole == null)
+            if (sysPost == null)
             {
                 return ResultModel<bool>.Fail("参数不能为空");
             }
-            bool result = sysRole.RoleId != default ? await sysRoleService.UpdateEntityAsync(sysRole) : await sysRoleService.CreateEntityAsync(sysRole);
+            bool result = sysPost.PostId != default ? await SysPostService.UpdateEntityAsync(sysPost) : await SysPostService.CreateEntityAsync(sysPost);
             return ResultModel<bool>.Success(result);
         }
 
@@ -77,7 +76,7 @@ namespace FastStart.WebApi.Controllers
         {
             if (dto.Ids == null || dto.Ids.Length <= 0)
                 return ResultModel<int>.Fail("参数不能为空");
-            int deletedCount = await sysRoleService.DeleteEntitiesByWhereAsync(x => dto.Ids.Contains(x.RoleId));
+            int deletedCount = await SysPostService.DeleteEntitiesByWhereAsync(x => dto.Ids.Contains(x.PostId));
             return ResultModel<int>.Success(deletedCount);
         }
     }

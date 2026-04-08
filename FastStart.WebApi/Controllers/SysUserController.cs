@@ -1,11 +1,10 @@
 ﻿using AutoMapper;
+using FastStart.Common.Utils;
 using FastStart.Domain;
 using FastStart.Domain.Entity;
 using FastStart.Domain.Models;
 using FastStart.Service;
 using Microsoft.AspNetCore.Mvc;
-using SqlSugar;
-using System.Linq.Expressions;
 
 namespace FastStart.WebApi.Controllers
 {
@@ -32,119 +31,37 @@ namespace FastStart.WebApi.Controllers
         }
 
         /// <summary>
-        /// 获取全部用户信息
+        /// 分页查询
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        [Route("GetAllSysUser")]
-        public async Task<ResultModel<List<SysUserVO>>> Get()
+        [Route("GetEntitiesByWhereToPageAsync")]
+        public async Task<ResultModel<SelectByPageVO<SysUser>>> GetEntitiesByWhereToPageAsync([FromQuery] SysUserDTO queryParameters)
         {
-            List<SysUser> sysUsers = await sysUserService.GetEntitysAsync();
-            List<SysUserVO> sysUserVOs = mapper.Map<List<SysUserVO>>(sysUsers);
-            return ResultModel<List<SysUserVO>>.Success(sysUserVOs);
-        }
-
-        /// <summary>
-        /// 带条件分页查询获取用户信息
-        /// </summary>
-        /// <returns></returns>
-        [HttpGet]
-        [Route("GetSysUserByWhereToPage")]
-        public ResultModel<SelectByPageVO<SysUser>> GetSysUserByWhereToPage([FromQuery] SysUserDTO queryParameters)
-        {
-            // Build the query expression
-            Expression<Func<SysUser, bool>> whereExpression = BuildQueryExpression(queryParameters);
-
-            // Now pass the expression to your service layer
-            int totalCount = 0;
-            List<SysUser> sysUsers = sysUserService.GetEntitysByWhereToPage(
-                whereExpression,
+            var where = QueryExpressionBuilder.BuildExpression<SysUser>(queryParameters);
+            var totalCount = 0;
+            var data = await sysUserService.GetEntitiesByWhereToPageAsync(
+                where,
                 queryParameters.pageIndex,
                 queryParameters.pageSize,
-                ref totalCount
+                totalCount
             );
-
-            SelectByPageVO<SysUser> selectByPageVO = new(sysUsers, totalCount);
-            return ResultModel<SelectByPageVO<SysUser>>.Success(selectByPageVO);
+            return ResultModel<SelectByPageVO<SysUser>>.Success(new SelectByPageVO<SysUser>(data, totalCount));
         }
 
         /// <summary>
-        /// 构建查询表达式
-        /// </summary>
-        /// <param name="queryParameters"></param>
-        /// <returns></returns>
-        private static Expression<Func<SysUser, bool>> BuildQueryExpression(SysUserDTO? queryParameters)
-        {
-            // 参数为 null 时返回无条件表达式（查询所有记录）
-            if (queryParameters == null)
-            {
-                return x => true;
-            }
-
-            var expressionable = Expressionable.Create<SysUser>();
-
-            if (!string.IsNullOrEmpty(queryParameters.UserName))
-            {
-                expressionable.And(x => x.UserName != null && x.UserName.Contains(queryParameters.UserName));
-            }
-            if (!string.IsNullOrEmpty(queryParameters.NickName))
-            {
-                expressionable.And(x => x.NickName != null && x.NickName.Contains(queryParameters.NickName));
-            }
-            if (!string.IsNullOrEmpty(queryParameters.Phonenumber))
-            {
-                expressionable.And(x => x.Phonenumber != null && x.Phonenumber.Contains(queryParameters.Phonenumber));
-            }
-            if (!string.IsNullOrEmpty(queryParameters.Email))
-            {
-                expressionable.And(x => x.Email != null && x.Email.Contains(queryParameters.Email));
-            }
-            if (!string.IsNullOrEmpty(queryParameters.Sex))
-            {
-                expressionable.And(x => x.Sex == queryParameters.Sex);
-            }
-
-            var expression = expressionable.ToExpression();
-            return expression ?? (x => true);
-        }
-
-        /// <summary>
-        /// 通过id获取用户信息
-        /// </summary>
-        /// <returns></returns>
-        [HttpGet]
-        [Route("GetSysUserById")]
-        public async Task<ResultModel<SysUser>> GetSysUserById([FromQuery] string id)
-        {
-            if (string.IsNullOrEmpty(id))
-                return ResultModel<SysUser>.Fail("参数不能为空");
-            SysUser sysUser = await sysUserService.GetEntityByWhereAsync(x => x.UserId.Equals(id));
-            return ResultModel<SysUser>.Success(sysUser);
-        }
-
-        /// <summary>
-        /// 添加用户信息
+        /// 保存数据（新增/修改）
         /// </summary>
         /// <returns></returns>
         [HttpPost]
-        [Route("AddSysUser")]
-        public async Task<ResultModel<bool>> AddSysUser([FromBody] SysUser sysUser)
+        [Route("SaveEntity")]
+        public async Task<ResultModel<bool>> SaveEntity([FromBody] SysUser sysUser)
         {
-            bool result = await sysUserService.CreateEntityAsync(sysUser);
-            return ResultModel<bool>.Success(result);
-        }
-
-        /// <summary>
-        /// 通过id删除单个用户信息
-        /// </summary>
-        /// <returns></returns>
-        [HttpDelete]
-        [Route("DeleteSysUser")]
-        public async Task<ResultModel<bool>> DeleteSysUser(object id)
-        {
-            if (id == null)
+            if (sysUser == null)
+            {
                 return ResultModel<bool>.Fail("参数不能为空");
-            bool result = await sysUserService.DeleteEntityByIdAsync(id);
+            }
+            bool result = sysUser.UserId != default ? await sysUserService.UpdateEntityAsync(sysUser) : await sysUserService.CreateEntityAsync(sysUser);
             return ResultModel<bool>.Success(result);
         }
 
@@ -154,42 +71,13 @@ namespace FastStart.WebApi.Controllers
         /// <param name="dto">选择的实体</param>
         /// <returns></returns>
         [HttpDelete]
-        [Route("DeleteSysUserList")]
-        public async Task<ResultModel<int>> DeleteSysUserList([FromBody] IdsDTO dto)
+        [Route("DeleteEntitiesAsync")]
+        public async Task<ResultModel<int>> DeleteEntitiesAsync([FromBody] IdsDTO dto)
         {
             if (dto.Ids == null || dto.Ids.Length <= 0)
                 return ResultModel<int>.Fail("参数不能为空");
-            int deletedCount = await sysUserService.DeleteEntitysByWhereAsync(x => dto.Ids.Contains(x.UserId));
+            int deletedCount = await sysUserService.DeleteEntitiesByWhereAsync(x => dto.Ids.Contains(x.UserId));
             return ResultModel<int>.Success(deletedCount);
-        }
-
-        /// <summary>
-        /// 更新用户信息
-        /// </summary>
-        /// <param name="sysUser">更新后的新实体信息</param>
-        /// <returns></returns>
-        [HttpPut]
-        [Route("UpdateSysUser")]
-        public async Task<ResultModel<bool>> UpdateSysUser([FromBody] SysUser sysUser)
-        {
-            bool result = await sysUserService.UpdateEntityAsync(sysUser);
-            return ResultModel<bool>.Success(result);
-        }
-
-        /// <summary>
-        /// 保存用户信息
-        /// </summary>
-        /// <returns></returns>
-        [HttpPost]
-        [Route("SaveSysUser")]
-        public async Task<ResultModel<bool>> SaveSysUser([FromBody] SysUser sysUser)
-        {
-            if (sysUser == null)
-            {
-                return ResultModel<bool>.Fail("参数不能为空");
-            }
-            bool result = sysUser.UserId != default ? await sysUserService.UpdateEntityAsync(sysUser) : await sysUserService.CreateEntityAsync(sysUser);
-            return ResultModel<bool>.Success(result);
         }
     }
 }
