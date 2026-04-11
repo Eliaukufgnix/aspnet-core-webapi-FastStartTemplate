@@ -1,4 +1,4 @@
-﻿using FastStart.Repository;
+using FastStart.Repository;
 using SqlSugar;
 using System.Data;
 using System.Linq.Expressions;
@@ -71,6 +71,11 @@ namespace FastStart.Service
         public async Task<List<T>> GetEntitiesByWhereToPageAsync(Expression<Func<T, bool>> expression, int pageIndex, int pageSize, RefAsync<int> totalCount)
         {
             return await baseRepository.GetEntitiesByWhereToPageAsync(expression, pageIndex, pageSize, totalCount);
+        }
+
+        public async Task<List<T>> GetEntitiesByWhereToPageAsync(Expression<Func<T, bool>> expression, Expression<Func<T, object>> orderByExpression, int pageIndex, int pageSize, RefAsync<int> totalCount, bool isAsc = false)
+        {
+            return await baseRepository.GetEntitiesByWhereToPageAsync(expression, orderByExpression, pageIndex, pageSize, totalCount, isAsc);
         }
 
         public Task<bool> UpdateEntityAsync(T entity)

@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+using AutoMapper;
 using FastStart.Common.Utils;
 using FastStart.Domain;
 using FastStart.Domain.Entity;
@@ -44,11 +44,12 @@ namespace FastStart.WebApi.Controllers
             var totalCountRef = new RefAsync<int>(0);
             var data = await sysMenuService.GetEntitiesByWhereToPageAsync(
                 where,
+                x => x.ParentId,
                 queryParameters.pageIndex,
                 queryParameters.pageSize,
-                totalCountRef
+                totalCountRef,
+                true
             );
-            data = data.OrderByDescending(x => x.OrderNum).ToList();
             var totalCount = totalCountRef.Value;
             return ResultModel<SelectByPageVO<SysMenu>>.Success(new SelectByPageVO<SysMenu>(data, totalCount));
         }
@@ -79,7 +80,9 @@ namespace FastStart.WebApi.Controllers
         public async Task<ResultModel<int>> DeleteEntitiesAsync([FromBody] IdsDTO dto)
         {
             if (dto.Ids == null || dto.Ids.Length <= 0)
+            {
                 return ResultModel<int>.Fail("参数不能为空");
+            }
             int deletedCount = await sysMenuService.DeleteEntitiesByWhereAsync(x => dto.Ids.Contains(x.MenuId));
             return ResultModel<int>.Success(deletedCount);
         }

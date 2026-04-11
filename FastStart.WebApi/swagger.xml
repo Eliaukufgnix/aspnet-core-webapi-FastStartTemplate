@@ -250,6 +250,37 @@
             <param name="dto">选择的实体</param>
             <returns></returns>
         </member>
+        <member name="T:FastStart.WebApi.Controllers.SysDictController">
+            <summary>
+            部门管理
+            </summary>
+        </member>
+        <member name="M:FastStart.WebApi.Controllers.SysDictController.#ctor(FastStart.Service.IBaseService{FastStart.Domain.Entity.SysDictType},AutoMapper.IMapper)">
+             <summary>
+            
+             </summary>
+             <param name="_sysDictService"></param>
+             <param name="_mapper"></param>
+        </member>
+        <member name="M:FastStart.WebApi.Controllers.SysDictController.GetEntitiesByWhereToPageAsync(FastStart.Domain.Models.SysDictDTO)">
+            <summary>
+            分页查询
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FastStart.WebApi.Controllers.SysDictController.SaveEntity(FastStart.Domain.Entity.SysDictType)">
+            <summary>
+            保存数据（新增/修改）
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FastStart.WebApi.Controllers.SysDictController.DeleteEntitiesAsync(FastStart.Domain.Models.IdsDTO)">
+            <summary>
+            多选后通过ids进行批量删除
+            </summary>
+            <param name="dto">选择的实体</param>
+            <returns></returns>
+        </member>
         <member name="T:FastStart.WebApi.Controllers.SysMenuController">
             <summary>
             菜单管理
@@ -300,6 +331,37 @@
             通过用户id获取菜单信息
             </summary>
             <param name="UserId"></param>
+            <returns></returns>
+        </member>
+        <member name="T:FastStart.WebApi.Controllers.SysOperLogController">
+            <summary>
+            操作日志管理
+            </summary>
+        </member>
+        <member name="M:FastStart.WebApi.Controllers.SysOperLogController.#ctor(FastStart.Service.IBaseService{FastStart.Domain.Entity.SysOperLog},AutoMapper.IMapper)">
+             <summary>
+            
+             </summary>
+             <param name="_SysOperLogService"></param>
+             <param name="_mapper"></param>
+        </member>
+        <member name="M:FastStart.WebApi.Controllers.SysOperLogController.GetEntitiesByWhereToPageAsync(FastStart.Domain.Models.SysOperLogDTO)">
+            <summary>
+            分页查询
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FastStart.WebApi.Controllers.SysOperLogController.SaveEntity(FastStart.Domain.Entity.SysOperLog)">
+            <summary>
+            保存数据（新增/修改）
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FastStart.WebApi.Controllers.SysOperLogController.DeleteEntitiesAsync(FastStart.Domain.Models.IdsDTO)">
+            <summary>
+            多选后通过ids进行批量删除
+            </summary>
+            <param name="dto">选择的实体</param>
             <returns></returns>
         </member>
         <member name="T:FastStart.WebApi.Controllers.SysPostController">

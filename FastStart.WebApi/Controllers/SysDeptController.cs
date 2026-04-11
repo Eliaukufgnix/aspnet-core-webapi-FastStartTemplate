@@ -1,10 +1,11 @@
-﻿using AutoMapper;
+using AutoMapper;
 using FastStart.Common.Utils;
 using FastStart.Domain;
 using FastStart.Domain.Entity;
 using FastStart.Domain.Models;
 using FastStart.Service;
 using Microsoft.AspNetCore.Mvc;
+using SqlSugar;
 
 namespace FastStart.WebApi.Controllers
 {
@@ -39,13 +40,16 @@ namespace FastStart.WebApi.Controllers
         public async Task<ResultModel<SelectByPageVO<SysDept>>> GetEntitiesByWhereToPageAsync([FromQuery] SysDeptDTO queryParameters)
         {
             var where = QueryExpressionBuilder.BuildExpression<SysDept>(queryParameters);
-            var totalCount = 0;
+            var totalCountRef = new RefAsync<int>(0);
             var data = await SysDeptService.GetEntitiesByWhereToPageAsync(
                 where,
+                x => x.DeptId,
                 queryParameters.pageIndex,
                 queryParameters.pageSize,
-                totalCount
+                totalCountRef,
+                false
             );
+            var totalCount = totalCountRef.Value;
             return ResultModel<SelectByPageVO<SysDept>>.Success(new SelectByPageVO<SysDept>(data, totalCount));
         }
 
@@ -75,7 +79,9 @@ namespace FastStart.WebApi.Controllers
         public async Task<ResultModel<int>> DeleteEntitiesAsync([FromBody] IdsDTO dto)
         {
             if (dto.Ids == null || dto.Ids.Length <= 0)
+            {
                 return ResultModel<int>.Fail("参数不能为空");
+            }
             int deletedCount = await SysDeptService.DeleteEntitiesByWhereAsync(x => dto.Ids.Contains(x.DeptId));
             return ResultModel<int>.Success(deletedCount);
         }

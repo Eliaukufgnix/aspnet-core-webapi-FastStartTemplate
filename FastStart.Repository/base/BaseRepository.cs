@@ -1,4 +1,4 @@
-﻿using SqlSugar;
+using SqlSugar;
 using System.Data;
 using System.Linq.Expressions;
 
@@ -150,6 +150,27 @@ namespace FastStart.Repository
             try
             {
                 return await db.Queryable<T>().Where(expression).ToPageListAsync(pageIndex, pageSize, totalCount);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public virtual async Task<List<T>> GetEntitiesByWhereToPageAsync(Expression<Func<T, bool>> expression, Expression<Func<T, object>> orderByExpression, int pageIndex, int pageSize, RefAsync<int> totalCount, bool isAsc = false)
+        {
+            try
+            {
+                var query = db.Queryable<T>().Where(expression);
+                if (isAsc)
+                {
+                    query = query.OrderBy(orderByExpression, OrderByType.Asc);
+                }
+                else
+                {
+                    query = query.OrderBy(orderByExpression, OrderByType.Desc);
+                }
+                return await query.ToPageListAsync(pageIndex, pageSize, totalCount);
             }
             catch (Exception)
             {

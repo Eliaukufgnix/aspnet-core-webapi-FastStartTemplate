@@ -10,24 +10,24 @@ using SqlSugar;
 namespace FastStart.WebApi.Controllers
 {
     /// <summary>
-    /// 岗位管理
+    /// 操作日志管理
     /// </summary>
     [Route("dev-api/[controller]")]
     [ApiController]
-    [ApiExplorerSettings(GroupName = "SysPost")]
-    public class SysPostController : ControllerBase
+    [ApiExplorerSettings(GroupName = "SysOperLog")]
+    public class SysOperLogController : ControllerBase
     {
-        private readonly IBaseService<SysPost> SysPostService;
+        private readonly IBaseService<SysOperLog> SysOperLogService;
         private readonly IMapper mapper;
 
         /// <summary>
         ///
         /// </summary>
-        /// <param name="_SysPostService"></param>
+        /// <param name="_SysOperLogService"></param>
         /// <param name="_mapper"></param>
-        public SysPostController(IBaseService<SysPost> _SysPostService, IMapper _mapper)
+        public SysOperLogController(IBaseService<SysOperLog> _SysOperLogService, IMapper _mapper)
         {
-            SysPostService = _SysPostService;
+            SysOperLogService = _SysOperLogService;
             mapper = _mapper;
         }
 
@@ -37,20 +37,20 @@ namespace FastStart.WebApi.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("GetEntitiesByWhereToPageAsync")]
-        public async Task<ResultModel<SelectByPageVO<SysPost>>> GetEntitiesByWhereToPageAsync([FromQuery] SysPostDTO queryParameters)
+        public async Task<ResultModel<SelectByPageVO<SysOperLog>>> GetEntitiesByWhereToPageAsync([FromQuery] SysOperLogDTO queryParameters)
         {
-            var where = QueryExpressionBuilder.BuildExpression<SysPost>(queryParameters);
+            var where = QueryExpressionBuilder.BuildExpression<SysOperLog>(queryParameters);
             var totalCountRef = new RefAsync<int>(0);
-            var data = await SysPostService.GetEntitiesByWhereToPageAsync(
+            var data = await SysOperLogService.GetEntitiesByWhereToPageAsync(
                 where,
-                x => x.PostId,
+                x => x.OperId,
                 queryParameters.pageIndex,
                 queryParameters.pageSize,
                 totalCountRef,
                 false
             );
             var totalCount = totalCountRef.Value;
-            return ResultModel<SelectByPageVO<SysPost>>.Success(new SelectByPageVO<SysPost>(data, totalCount));
+            return ResultModel<SelectByPageVO<SysOperLog>>.Success(new SelectByPageVO<SysOperLog>(data, totalCount));
         }
 
         /// <summary>
@@ -59,13 +59,13 @@ namespace FastStart.WebApi.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route("SaveEntity")]
-        public async Task<ResultModel<bool>> SaveEntity([FromBody] SysPost sysPost)
+        public async Task<ResultModel<bool>> SaveEntity([FromBody] SysOperLog SysOperLog)
         {
-            if (sysPost == null)
+            if (SysOperLog == null)
             {
                 return ResultModel<bool>.Fail("参数不能为空");
             }
-            bool result = sysPost.PostId != default ? await SysPostService.UpdateEntityAsync(sysPost) : await SysPostService.CreateEntityAsync(sysPost);
+            bool result = SysOperLog.OperId != default ? await SysOperLogService.UpdateEntityAsync(SysOperLog) : await SysOperLogService.CreateEntityAsync(SysOperLog);
             return ResultModel<bool>.Success(result);
         }
 
@@ -82,7 +82,7 @@ namespace FastStart.WebApi.Controllers
             {
                 return ResultModel<int>.Fail("参数不能为空");
             }
-            int deletedCount = await SysPostService.DeleteEntitiesByWhereAsync(x => dto.Ids.Contains(x.PostId));
+            int deletedCount = await SysOperLogService.DeleteEntitiesByWhereAsync(x => dto.Ids.Contains(x.OperId));
             return ResultModel<int>.Success(deletedCount);
         }
     }

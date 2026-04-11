@@ -10,24 +10,24 @@ using SqlSugar;
 namespace FastStart.WebApi.Controllers
 {
     /// <summary>
-    /// 岗位管理
+    /// 部门管理
     /// </summary>
     [Route("dev-api/[controller]")]
     [ApiController]
-    [ApiExplorerSettings(GroupName = "SysPost")]
-    public class SysPostController : ControllerBase
+    [ApiExplorerSettings(GroupName = "SysDict")]
+    public class SysDictController : ControllerBase
     {
-        private readonly IBaseService<SysPost> SysPostService;
+        private readonly IBaseService<SysDictType> SysDictService;
         private readonly IMapper mapper;
 
         /// <summary>
         ///
         /// </summary>
-        /// <param name="_SysPostService"></param>
+        /// <param name="_sysDictService"></param>
         /// <param name="_mapper"></param>
-        public SysPostController(IBaseService<SysPost> _SysPostService, IMapper _mapper)
+        public SysDictController(IBaseService<SysDictType> _sysDictService, IMapper _mapper)
         {
-            SysPostService = _SysPostService;
+            SysDictService = _sysDictService;
             mapper = _mapper;
         }
 
@@ -37,20 +37,20 @@ namespace FastStart.WebApi.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("GetEntitiesByWhereToPageAsync")]
-        public async Task<ResultModel<SelectByPageVO<SysPost>>> GetEntitiesByWhereToPageAsync([FromQuery] SysPostDTO queryParameters)
+        public async Task<ResultModel<SelectByPageVO<SysDictType>>> GetEntitiesByWhereToPageAsync([FromQuery] SysDictDTO queryParameters)
         {
-            var where = QueryExpressionBuilder.BuildExpression<SysPost>(queryParameters);
+            var where = QueryExpressionBuilder.BuildExpression<SysDictType>(queryParameters);
             var totalCountRef = new RefAsync<int>(0);
-            var data = await SysPostService.GetEntitiesByWhereToPageAsync(
+            var data = await SysDictService.GetEntitiesByWhereToPageAsync(
                 where,
-                x => x.PostId,
+                x => x.DictId,
                 queryParameters.pageIndex,
                 queryParameters.pageSize,
                 totalCountRef,
                 false
             );
             var totalCount = totalCountRef.Value;
-            return ResultModel<SelectByPageVO<SysPost>>.Success(new SelectByPageVO<SysPost>(data, totalCount));
+            return ResultModel<SelectByPageVO<SysDictType>>.Success(new SelectByPageVO<SysDictType>(data, totalCount));
         }
 
         /// <summary>
@@ -59,13 +59,13 @@ namespace FastStart.WebApi.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route("SaveEntity")]
-        public async Task<ResultModel<bool>> SaveEntity([FromBody] SysPost sysPost)
+        public async Task<ResultModel<bool>> SaveEntity([FromBody] SysDictType sysDictType)
         {
-            if (sysPost == null)
+            if (sysDictType == null)
             {
                 return ResultModel<bool>.Fail("参数不能为空");
             }
-            bool result = sysPost.PostId != default ? await SysPostService.UpdateEntityAsync(sysPost) : await SysPostService.CreateEntityAsync(sysPost);
+            bool result = sysDictType.DictId != default ? await SysDictService.UpdateEntityAsync(sysDictType) : await SysDictService.CreateEntityAsync(sysDictType);
             return ResultModel<bool>.Success(result);
         }
 
@@ -82,7 +82,7 @@ namespace FastStart.WebApi.Controllers
             {
                 return ResultModel<int>.Fail("参数不能为空");
             }
-            int deletedCount = await SysPostService.DeleteEntitiesByWhereAsync(x => dto.Ids.Contains(x.PostId));
+            int deletedCount = await SysDictService.DeleteEntitiesByWhereAsync(x => dto.Ids.Contains(x.DictId));
             return ResultModel<int>.Success(deletedCount);
         }
     }

@@ -1,4 +1,4 @@
-﻿using Autofac;
+using Autofac;
 using FastStart.Domain.Entity;
 using FastStart.Quartz;
 using FastStart.Repository;
@@ -36,7 +36,7 @@ namespace FastStart.WebApi.Config
             builder.RegisterAssemblyTypes(repository, service).AsImplementedInterfaces();
             // 注入SysLoginService
             builder.RegisterType<LoginService>().AsSelf().InstancePerLifetimeScope();
-            builder.RegisterGeneric(typeof(BaseService<>)).As(typeof(IBaseService<>)).SingleInstance();
+            builder.RegisterGeneric(typeof(BaseService<>)).As(typeof(IBaseService<>)).InstancePerLifetimeScope();
             // 注册泛型仓储
             builder.RegisterGeneric(typeof(BaseRepository<>))
                    .As(typeof(IBaseRepository<>))

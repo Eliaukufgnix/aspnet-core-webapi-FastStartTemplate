@@ -1,10 +1,11 @@
-﻿using AutoMapper;
+using AutoMapper;
 using FastStart.Common.Utils;
 using FastStart.Domain;
 using FastStart.Domain.Entity;
 using FastStart.Domain.Models;
 using FastStart.Service;
 using Microsoft.AspNetCore.Mvc;
+using SqlSugar;
 
 namespace FastStart.WebApi.Controllers
 {
@@ -39,13 +40,16 @@ namespace FastStart.WebApi.Controllers
         public async Task<ResultModel<SelectByPageVO<SysUser>>> GetEntitiesByWhereToPageAsync([FromQuery] SysUserDTO queryParameters)
         {
             var where = QueryExpressionBuilder.BuildExpression<SysUser>(queryParameters);
-            var totalCount = 0;
+            var totalCountRef = new RefAsync<int>(0);
             var data = await sysUserService.GetEntitiesByWhereToPageAsync(
                 where,
+                x => x.UserId,
                 queryParameters.pageIndex,
                 queryParameters.pageSize,
-                totalCount
+                totalCountRef,
+                false
             );
+            var totalCount = totalCountRef.Value;
             return ResultModel<SelectByPageVO<SysUser>>.Success(new SelectByPageVO<SysUser>(data, totalCount));
         }
 
@@ -75,7 +79,9 @@ namespace FastStart.WebApi.Controllers
         public async Task<ResultModel<int>> DeleteEntitiesAsync([FromBody] IdsDTO dto)
         {
             if (dto.Ids == null || dto.Ids.Length <= 0)
+            {
                 return ResultModel<int>.Fail("参数不能为空");
+            }
             int deletedCount = await sysUserService.DeleteEntitiesByWhereAsync(x => dto.Ids.Contains(x.UserId));
             return ResultModel<int>.Success(deletedCount);
         }
