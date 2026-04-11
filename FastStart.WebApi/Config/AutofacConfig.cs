@@ -1,11 +1,11 @@
 using Autofac;
-using FastStart.Domain.Entity;
 using FastStart.Quartz;
 using FastStart.Repository;
 using FastStart.Service;
 using FastStart.Service.impl;
 using Quartz.Spi;
 using SqlSugar;
+using StackExchange.Redis;
 using System.Reflection;
 
 namespace FastStart.WebApi.Config
@@ -47,6 +47,20 @@ namespace FastStart.WebApi.Config
             {
                 return SqlSugarConfig.AddSqlSugarModule(c.Resolve<IConfiguration>(), "SqlServer");
             }).As<ISqlSugarClient>().InstancePerLifetimeScope();
+
+            // 注入Redis连接
+            builder.Register(c =>
+            {
+                var configuration = c.Resolve<IConfiguration>();
+                var redisConnection = configuration.GetConnectionString("Redis");
+                if (string.IsNullOrEmpty(redisConnection))
+                {
+                    redisConnection = "127.0.0.1:6379,abortConnect=false";
+                }
+                var options = ConfigurationOptions.Parse(redisConnection);
+                options.AllowAdmin = true;
+                return ConnectionMultiplexer.Connect(options);
+            }).As<IConnectionMultiplexer>().SingleInstance();
             //自定义Job工厂
             // services.AddSingleton<IJobFactory, ZeroJobFactory>();
             builder.RegisterType<ZeroJobFactory>().As<IJobFactory>().SingleInstance();
